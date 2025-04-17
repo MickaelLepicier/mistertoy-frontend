@@ -1,7 +1,7 @@
 
 
 import { toyReducer } from './toy/toyReducer'
-import { userReducer } from './toy/user.reducer'
+import { userReducer } from './user/userReducer'
 import {legacy_createStore as createStore, compose, combineReducers} from 'redux'
 
 const rootReducer = combineReducers({
