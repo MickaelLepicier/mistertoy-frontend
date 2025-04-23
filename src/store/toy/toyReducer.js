@@ -1,3 +1,5 @@
+import { toyService } from "../../services/toy.service"
+
 // Toys
 export const SET_TOYS = 'SET_TOYS'
 export const REMOVE_TOY = 'REMOVE_TOY'

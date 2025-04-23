@@ -4,6 +4,10 @@ import { store } from './store/store'
 import { AppHeader } from './cmps/AppHeader'
 import { AppFooter } from './cmps/AppFooter'
 import { UserMsg } from './cmps/UserMsg'
+import { HomePage } from './pages/HomePage'
+
+
+//TODOS - Add CSS
 
 // imports:
 // HomePage
