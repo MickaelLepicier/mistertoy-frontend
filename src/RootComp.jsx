@@ -1,6 +1,8 @@
 import { Provider } from 'react-redux'
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 import { store } from './store/store'
+import './assets/style/main.css'
+
 import { AppHeader } from './cmps/AppHeader'
 import { AppFooter } from './cmps/AppFooter'
 import { UserMsg } from './cmps/UserMsg'
@@ -24,7 +26,8 @@ function App() {
       <Router>
         <section>
           <AppHeader />
-          <main>
+          {/* <main style={{ flex: 1 }}> */}
+          <main >
             <Routes>
               <Route path="/" element={<HomePage />} />
             </Routes>

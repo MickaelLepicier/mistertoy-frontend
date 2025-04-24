@@ -2,8 +2,16 @@ import { NavLink } from 'react-router-dom'
 
 export function AppHeader() {
   return (
-    <section className="app-header container">
-      <div className="logo">Mister Toy</div>
+    <section className="app-header">
+      {/* CartButton */}
+
+      <header>
+        Fast and free delivery to collection points throughout the country for
+        purchases over 299 NIS
+      </header>
+
+      <main>
+      <div className="logo">MISTER TOY</div>
 
       <nav>
         <NavLink to="/">Home</NavLink>
@@ -11,6 +19,12 @@ export function AppHeader() {
         <NavLink to="/dashboard">Dashboard</NavLink>
         <NavLink to="/about">About</NavLink>
       </nav>
+
+      {/* FilterTab */}
+      </main>
+
+    {/* <footer> special filter </footer> */}
+
     </section>
   )
 }

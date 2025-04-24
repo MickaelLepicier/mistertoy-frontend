@@ -1,0 +1,9 @@
+.home-page {
+  /* height: calc(100vh - 230px); */
+  /* height:100vh; */
+  justify-items: center;
+}
+
+.home-page img {
+  max-width: 700px;
+}

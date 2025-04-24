@@ -1,6 +1,5 @@
 
 
-
 /* Base */
 @import 'base/base.css';
 @import 'base/helpers.css';
@@ -15,3 +14,4 @@
 @import 'cmps/common/UserMsg.css';
 @import 'cmps/AppHeader.css';
 @import 'cmps/AppFooter.css';
+@import 'cmps/HomePage.css';

@@ -1,0 +1,31 @@
+.app-footer {
+  position: relative;
+
+  display: flex;
+  justify-content: center;
+
+  min-height: 50px;
+
+  background-color: aqua;
+  
+}
+
+.wave {
+  position: absolute;
+  bottom: 50px;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.wave svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 57px;
+}
+
+.wave .shape-fill {
+  fill: aqua;
+}
