@@ -21,13 +21,18 @@ import { HomePage } from './pages/HomePage'
 // TODO keep going ;)
 
 function App() {
+  const style = {
+    display: 'flex',
+    flexDirection: 'column',
+  }
+
   return (
     <Provider store={store}>
       <Router>
-        <section>
+        <section >
           <AppHeader />
           {/* <main style={{ flex: 1 }}> */}
-          <main >
+          <main style={style}>
             <Routes>
               <Route path="/" element={<HomePage />} />
             </Routes>

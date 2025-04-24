@@ -1,8 +1,20 @@
+
+/*TODO maybe add 'height: 1fr;' to the main in the base.css */
+
 .home-page {
   /* height: calc(100vh - 230px); */
   /* height:100vh; */
+
+  /* display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  flex-grow: 1; */
+
+  height: 1fr;
   justify-items: center;
 }
+
 
 .home-page img {
   max-width: 700px;
