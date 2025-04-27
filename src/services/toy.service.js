@@ -23,7 +23,9 @@ export const toyService = {
   save,
   getDefaultFilter,
   getDefaultSort,
-  getEmptyToy
+  getEmptyToy,
+  getToyLabels,
+  getToyLabelCounts
 }
 
 function query(filterBy = {}, sortBy = {}) {
@@ -65,7 +67,7 @@ function getDefaultFilter() {
   return {
     txt: '',
     inStock: null,
-    labels: [],
+    labels: []
     // pageIdx: 0
   }
 }
@@ -83,39 +85,33 @@ function getEmptyToy() {
   }
 }
 
-/*
-
 function getToyLabels() {
-    return Promise.resolve(labels)
+  return Promise.resolve(labels)
 }
 
 function getToyLabelCounts() {
-    return storageService.query(TOY_DB).then(toys => {
-        const labelCounts = {}
-        toys.forEach(toy => {
-            toy.labels.forEach(label => {
-                if (!labelCounts[label]) labelCounts[label] = { total: 0, inStock: 0 }
-                labelCounts[label].total++
-                if (toy.inStock) labelCounts[label].inStock++
-            })
-        })
-        return labelCounts
+  return storageService.query(TOY_DB).then((toys) => {
+    const labelCounts = {}
+    toys.forEach((toy) => {
+      toy.labels.forEach((label) => {
+        if (!labelCounts[label]) labelCounts[label] = { total: 0, inStock: 0 }
+        labelCounts[label].total++
+        if (toy.inStock) labelCounts[label].inStock++
+      })
     })
+    return labelCounts
+  })
 }
 
 function _getRandomLabels() {
-    const labelsCopy = [...labels]
-    const randomLabels = []
-    for (let i = 0; i < 2; i++) {
-        const idx = Math.floor(Math.random() * labelsCopy.length)
-        randomLabels.push(labelsCopy.splice(idx, 1)[0])
-    }
-    return randomLabels
+  const labelsCopy = [...labels]
+  const randomLabels = []
+  for (let i = 0; i < 2; i++) {
+    const idx = Math.floor(Math.random() * labelsCopy.length)
+    randomLabels.push(labelsCopy.splice(idx, 1)[0])
+  }
+  return randomLabels
 }
-
-
-
-*/
 
 function _createToys() {
   let toys = utilService.loadFromStorage(TOY_DB)

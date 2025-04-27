@@ -10,6 +10,7 @@ import { HomePage } from './pages/HomePage'
 import { AboutUs } from './pages/AboutUs'
 import { ToyIndex } from './pages/ToyIndex'
 import { ToyDetails } from './pages/ToyDetails'
+import { ToyEdit } from './cmps/ToyEdit'
 
 
 //TODOS - Add CSS
@@ -37,7 +38,7 @@ function App() {
               <Route path="/about" element={<AboutUs />} />
               <Route path="/toy" element={<ToyIndex />} />
               <Route path="/toy/:toyId" element={<ToyDetails />} />
-              {/* <Route path="/toy/edit/:toyId?" element={<ToyEdit />} /> */}
+              <Route path="/toy/edit/:toyId?" element={<ToyEdit />} />
               
             </Routes>
           </main>

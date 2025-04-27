@@ -1,6 +1,6 @@
 import { toyService } from '../../services/toy.service'
 import { store } from '../store'
-import { SET_TOYS, REMOVE_TOY, SET_IS_LOADING, TOY_UNDO, SET_FILTER_BY, SET_SORT_BY } from './toyReducer'
+import { SET_TOYS, REMOVE_TOY, SET_IS_LOADING, TOY_UNDO, SET_FILTER_BY, SET_SORT_BY, UPDATE_TOY, ADD_TOY } from './toyReducer'
 
 
 export function loadToys() {
@@ -54,7 +54,7 @@ export function saveToy(toy) {
   return toyService
     .save(toy)
     .then((toyToSave) => {
-      state.dispatch({ type, toy: toyToSave })
+      store.dispatch({ type, toy: toyToSave })
       return toyToSave
     })
     .catch((err) => {
