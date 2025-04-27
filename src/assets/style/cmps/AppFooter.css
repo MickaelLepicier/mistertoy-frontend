@@ -6,7 +6,7 @@
 
   min-height: 50px;
 
-  background-color: aqua;
+  background-color: var(--clr3bg);
   
 }
 
@@ -27,5 +27,5 @@
 }
 
 .wave .shape-fill {
-  fill: aqua;
+  fill: var(--clr3bg);
 }

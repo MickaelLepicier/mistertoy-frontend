@@ -1,0 +1,13 @@
+.about-page{
+    justify-items: center;
+}
+
+.about-page h1{
+    font-size: 1.5em;
+    color: var(--clr3);
+}
+
+.about-page p {
+    max-width: 55%;
+    /* text-align: center;  */
+}

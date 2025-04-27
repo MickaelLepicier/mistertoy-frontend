@@ -7,12 +7,12 @@ import { AppHeader } from './cmps/AppHeader'
 import { AppFooter } from './cmps/AppFooter'
 import { UserMsg } from './cmps/UserMsg'
 import { HomePage } from './pages/HomePage'
+import { AboutUs } from './pages/AboutUs'
 
 
 //TODOS - Add CSS
 
 // imports:
-// HomePage
 
 // ToyIndex (Filter, ToyList, ToyPreview)
 // ToyDetails
@@ -22,8 +22,7 @@ import { HomePage } from './pages/HomePage'
 
 function App() {
   const style = {
-    display: 'flex',
-    flexDirection: 'column',
+    height: 'calc(100vh - 250px)'
   }
 
   return (
@@ -31,10 +30,11 @@ function App() {
       <Router>
         <section >
           <AppHeader />
-          {/* <main style={{ flex: 1 }}> */}
           <main style={style}>
             <Routes>
               <Route path="/" element={<HomePage />} />
+              <Route path="/about" element={<AboutUs />} />
+            
             </Routes>
           </main>
           <AppFooter />

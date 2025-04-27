@@ -1,4 +1,8 @@
 
+/* Setup */
+@import 'setup/vars.css';
+@import 'setup/typography.css';
+@import 'setup/animations.css';
 
 
 
@@ -17,3 +21,4 @@
 @import 'cmps/AppHeader.css';
 @import 'cmps/AppFooter.css';
 @import 'cmps/HomePage.css';
+@import 'cmps/AboutUs.css';

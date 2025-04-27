@@ -2,7 +2,7 @@
   align-items: center;
   min-width: 100vw;
 
-  background-color: aqua;
+  background-color: var(--clr3bg);
 }
 
 .app-header header {
@@ -33,7 +33,7 @@
 }
 
 .app-header nav a.active {
-color:aqua
+color:var(--clr3bg)
 
 }
 
