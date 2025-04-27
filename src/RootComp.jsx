@@ -8,6 +8,7 @@ import { AppFooter } from './cmps/AppFooter'
 import { UserMsg } from './cmps/UserMsg'
 import { HomePage } from './pages/HomePage'
 import { AboutUs } from './pages/AboutUs'
+import { ToyIndex } from './pages/ToyIndex'
 
 
 //TODOS - Add CSS
@@ -22,7 +23,7 @@ import { AboutUs } from './pages/AboutUs'
 
 function App() {
   const style = {
-    height: 'calc(100vh - 250px)'
+    minHeight: 'calc(100vh - 250px)'
   }
 
   return (
@@ -34,6 +35,7 @@ function App() {
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/about" element={<AboutUs />} />
+              <Route path="/toy" element={<ToyIndex />} />
             
             </Routes>
           </main>

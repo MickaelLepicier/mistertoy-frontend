@@ -1,6 +1,10 @@
+import { useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 
 export function AppHeader() {
+  // const filterBy = useSelector(storeState => storeState.toys)
+  // const sortBy = useSelector(storeState => storeState.toys)
+
   return (
     <section className="app-header">
       {/* CartButton */}

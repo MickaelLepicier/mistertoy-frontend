@@ -5,11 +5,12 @@ import { SET_TOYS, REMOVE_TOY, SET_IS_LOADING, TOY_UNDO, SET_FILTER_BY, SET_SORT
 
 export function loadToys() {
   const { filterBy, sortBy } = store.getState().toyModule
-  store.dispatch({ SET_IS_LOADING, isLoading: true })
+  store.dispatch({ type:SET_IS_LOADING, isLoading: true })
 
   return toyService
     .query(filterBy, sortBy)
     .then((toys) => {
+      // console.log('SERVICE toys: ',toys)
       store.dispatch({ type: SET_TOYS, toys })
     })
     .catch((err) => {

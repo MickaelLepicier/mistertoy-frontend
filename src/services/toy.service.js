@@ -119,7 +119,7 @@ function _getRandomLabels() {
 
 function _createToys() {
   let toys = utilService.loadFromStorage(TOY_DB)
-  if (toys || toys.length > 0) return
+  if (toys || toys?.length > 0) return
 
   toys = [
     {
