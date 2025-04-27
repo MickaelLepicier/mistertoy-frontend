@@ -1,4 +1,4 @@
-import { toyService } from "../../services/toy.service"
+import { toyService } from '../../services/toy.service'
 
 // Toys
 export const SET_TOYS = 'SET_TOYS'
@@ -14,13 +14,17 @@ export const SET_SORT_BY = 'SET_SORT_BY'
 // isLoading
 export const SET_IS_LOADING = 'SET_IS_LOADING'
 
+// pageIdx
+export const SET_PAGE_IDX = 'SET_PAGE_IDX'
+
 const initialState = {
   toys: [],
   filterBy: toyService.getDefaultFilter(),
   sortBy: toyService.getDefaultSort(),
   lastToys: [],
 
-  isLoading: false
+  isLoading: false,
+  pageIdx: 0
 }
 
 export function toyReducer(state = initialState, cmd) {
@@ -50,20 +54,23 @@ export function toyReducer(state = initialState, cmd) {
         lastToys: state.toys
       }
 
-      case TOY_UNDO:
-        return { ...state, toys: [...state.lastToys] }
+    case TOY_UNDO:
+      return { ...state, toys: [...state.lastToys] }
 
     // Filter
     case SET_FILTER_BY:
       return { ...state, filterBy: { ...state.filterBy, ...cmd.filterBy } }
 
     case SET_SORT_BY:
-      return { ...state, sortBy: {...cmd.sortBy } }
-
+      return { ...state, sortBy: { ...cmd.sortBy } }
 
     // isLoading
     case SET_IS_LOADING:
       return { ...state, isLoading: cmd.isLoading }
+
+    // pageIdx
+    case SET_PAGE_IDX:
+      return { ...state, pageIdx: cmd.pageIdx }
 
     default:
       return state

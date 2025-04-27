@@ -1,6 +1,6 @@
 import { toyService } from '../../services/toy.service'
 import { store } from '../store'
-import { SET_TOYS, REMOVE_TOY, SET_IS_LOADING, TOY_UNDO, SET_FILTER_BY, SET_SORT_BY, UPDATE_TOY, ADD_TOY } from './toyReducer'
+import { SET_TOYS, REMOVE_TOY, SET_IS_LOADING, TOY_UNDO, SET_FILTER_BY, SET_SORT_BY, UPDATE_TOY, ADD_TOY, SET_PAGE_IDX } from './toyReducer'
 
 
 export function loadToys() {
@@ -50,7 +50,7 @@ export function removeToyOptimistic(toyId){
 export function saveToy(toy) {
   // add || update
   const type = toy._id ? UPDATE_TOY : ADD_TOY
-
+console.log('type: ',type)
   return toyService
     .save(toy)
     .then((toyToSave) => {
@@ -70,4 +70,9 @@ export function setFilter(filterBy = toyService.getDefaultFilter()){
 
 export function setSort(sortBy = toyService.getDefaultSort()){
     store.dispatch({type:SET_SORT_BY, sortBy})
+}
+
+export function setPageIdx(pageIdx = 0){
+  store.dispatch({type:SET_PAGE_IDX, pageIdx})
+
 }

@@ -39,6 +39,7 @@ function App() {
               <Route path="/toy" element={<ToyIndex />} />
               <Route path="/toy/:toyId" element={<ToyDetails />} />
               <Route path="/toy/edit/:toyId?" element={<ToyEdit />} />
+              {/* <Route element={<ToyDashboard />} path="/dashboard" /> */}
               
             </Routes>
           </main>

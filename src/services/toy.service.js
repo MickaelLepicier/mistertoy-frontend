@@ -54,7 +54,7 @@ function remove(toyId) {
 }
 
 function save(toy) {
-  if (toy.id) {
+  if (toy._id) {
     return storageService.put(TOY_DB, toy)
   } else {
     toy.createdAt = Date.now()
@@ -67,8 +67,8 @@ function getDefaultFilter() {
   return {
     txt: '',
     inStock: null,
-    labels: []
-    // pageIdx: 0
+    labels: [],
+    pageIdx: 0
   }
 }
 
