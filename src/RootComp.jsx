@@ -9,15 +9,15 @@ import { UserMsg } from './cmps/UserMsg'
 import { HomePage } from './pages/HomePage'
 import { AboutUs } from './pages/AboutUs'
 import { ToyIndex } from './pages/ToyIndex'
+import { ToyDetails } from './pages/ToyDetails'
 
 
 //TODOS - Add CSS
 
 // imports:
 
-// ToyIndex (Filter, ToyList, ToyPreview)
 // ToyDetails
-//
+// ToyEdit
 
 // TODO keep going ;)
 
@@ -36,7 +36,9 @@ function App() {
               <Route path="/" element={<HomePage />} />
               <Route path="/about" element={<AboutUs />} />
               <Route path="/toy" element={<ToyIndex />} />
-            
+              <Route path="/toy/:toyId" element={<ToyDetails />} />
+              {/* <Route path="/toy/edit/:toyId?" element={<ToyEdit />} /> */}
+              
             </Routes>
           </main>
           <AppFooter />
