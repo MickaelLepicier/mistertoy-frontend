@@ -6,6 +6,7 @@ import { Loader } from '../cmps/Loader'
 import { ToyList } from '../cmps/ToyList'
 import { PopUp } from '../cmps/PopUp'
 import { PaginationButtons } from '../cmps/PaginationButtons'
+import { Link } from 'react-router-dom'
 
 export function ToyIndex() {
   const toys = useSelector((storeState) => storeState.toyModule.toys)
@@ -14,14 +15,15 @@ export function ToyIndex() {
   const isLoading = useSelector((storeState) => storeState.toyModule.isLoading)
   const pageIdx = useSelector((storeState) => storeState.toyModule.pageIdx)
 
-//   const [pageIdx, setPageIdx] = useState(0)
+  //   const [pageIdx, setPageIdx] = useState(0)
   const [toyLabels, setToyLabels] = useState()
 
-
-  // TODO - add pageIdx and filter here
   useEffect(() => {
-    loadToys(pageIdx)
-  }, [])
+    loadToys(pageIdx).catch((err) => {
+      console.log('err:', err)
+      showErrorMsg('Cannot load toys')
+    })
+  }, [filterBy, sortBy, pageIdx])
 
   function onRemoveToy(toyId) {
     removeToy(toyId)
@@ -35,9 +37,15 @@ export function ToyIndex() {
   //   console.log('toys: ',toys)
   return (
     <section className="toy-index">
+      <div style={{ marginBlockStart: '0.5em', textAlign: 'center' }}>
+        <button style={{ marginInline: 0 }}>
+          <Link to="/toy/edit">Add Toy</Link>
+        </button>
+      </div>
+
       {isLoading && <Loader />}
       {!isLoading && <ToyList toys={toys} onRemoveToy={onRemoveToy} />}
-    
+
       {<PaginationButtons pageIdx={pageIdx} />}
 
       <PopUp footer={<footer>An Image</footer>} isOpen={pageIdx === 2}>

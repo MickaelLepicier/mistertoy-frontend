@@ -2,24 +2,34 @@ import { useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import { setFilter, setPageIdx, setSort } from '../store/toy/toyActions'
 import { ToyFilter } from './ToyFilter'
+import { toyService } from '../services/toy.service'
+import { useEffect, useState } from 'react'
+import { ToySort } from './ToySort'
 
 export function AppHeader() {
   const filterBy = useSelector((storeState) => storeState.toyModule.filterBy)
   const sortBy = useSelector((storeState) => storeState.toyModule.sortBy)
 
-  //TODO Add toyLabels in the state and add dispatch
+  const [toyLabels, setToyLabels] = useState()
 
-
+  useEffect(() => {
+    toyService
+      .getToyLabels()
+      .then(setToyLabels)
+      .catch((err) => {
+        console.log('err:', err)
+        showErrorMsg('Cannot load toys labels')
+      })
+  }, [])
 
   function onSetFilter(filterBy) {
     setFilter(filterBy)
     setPageIdx(0)
-}
+  }
 
   function onSetSort(sortBy) {
     setSort(sortBy)
-}
-
+  }
 
   return (
     <section className="app-header">
@@ -31,7 +41,6 @@ export function AppHeader() {
       </header>
 
       <main>
-
         <ToyFilter
           filterBy={filterBy}
           onSetFilter={onSetFilter}
@@ -48,10 +57,6 @@ export function AppHeader() {
           <NavLink to="/dashboard">Dashboard</NavLink>
           <NavLink to="/about">About</NavLink>
         </nav>
-
-        <ToySort sortBy={sortBy} onSetSort={onSetSort} />
-
-
       </main>
 
       {/* <footer> special filter </footer> */}

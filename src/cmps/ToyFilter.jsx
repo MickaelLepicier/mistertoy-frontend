@@ -2,48 +2,69 @@ import { useEffect, useRef, useState } from 'react'
 import { utilService } from '../services/util.service'
 import { ToySort } from './ToySort'
 
+export function ToyFilter({
+  filterBy,
+  onSetFilter,
+  sortBy,
+  onSetSort,
+  toyLabels
+}) {
+  const [filterByToEdit, setFilterByToEdit] = useState({ ...filterBy })
+  const debouncedOnSetFilter = useRef(
+    utilService.debounce(onSetFilter, 300)
+  ).current
 
-export function ToyFilter({ filterBy, onSetFilter, sortBy, onSetSort, toyLabels }) {
-    const [filterByToEdit, setFilterByToEdit] = useState({ ...filterBy })
-    const debouncedOnSetFilter = useRef(utilService.debounce(onSetFilter, 300)).current
+  useEffect(() => {
+    debouncedOnSetFilter(filterByToEdit)
+  }, [filterByToEdit])
 
-    useEffect(() => {
-        debouncedOnSetFilter(filterByToEdit)
-    }, [filterByToEdit])
-
-    function handleChange({ target }) {
-        let { value, name: field, type } = target
-        if (type === 'select-multiple') {
-            value = [...target.selectedOptions].map(option => option.value)
-        }
-        value = type === 'number' ? +value || '' : value
-        setFilterByToEdit(prevFilter => ({ ...prevFilter, [field]: value }))
+  function handleChange({ target }) {
+    let { value, name: field, type } = target
+    if (type === 'select-multiple') {
+      value = [...target.selectedOptions].map((option) => option.value)
     }
+    value = type === 'number' ? +value || '' : value
 
-    function onSubmitFilter(ev) {
-        ev.preventDefault()
-        onSetFilter(filterByToEdit)
-    }
+    value = changeToBoolean()
 
-    const { txt, inStock, labels } = filterByToEdit
+    setFilterByToEdit((prevFilter) => ({ ...prevFilter, [field]: value }))
+  }
 
-    return (
-        <section className="toy-filter container">
-            <h3>Toys Filter/Sort</h3>
-            <form onSubmit={onSubmitFilter} className="filter-form flex align-center">
-                <input
-                    onChange={handleChange}
-                    value={txt}
-                    type="text"
-                    placeholder="Search"
-                    name="txt"
-                />
-                <select name="inStock" value={inStock || ''} onChange={handleChange}>
-                    <option value="">All</option>
-                    <option value="true">In Stock</option>
-                    <option value="false">Not in stock</option>
-                </select>
-                {toyLabels &&
+  function changeToBoolean(value) {
+    if (value === 'true') return true
+    if (value === 'false') return false
+
+    return value
+  }
+
+  function onSubmitFilter(ev) {
+    ev.preventDefault()
+    onSetFilter(filterByToEdit)
+  }
+
+  const { txt, inStock, labels } = filterByToEdit
+
+  return (
+    <section className="toy-filter container">
+      {/* <h3>Toys Filter/Sort</h3> */}
+      <form onSubmit={onSubmitFilter} className="filter-form flex align-center">
+        <input
+          onChange={handleChange}
+          value={txt}
+          type="text"
+          placeholder="Search"
+          name="txt"
+        />
+        <select
+          name="inStock"
+          value={inStock === true ? 'true' : inStock === false ? 'false' : ''}
+          onChange={handleChange}
+        >
+          <option value="">All</option>
+          <option value="true">In Stock</option>
+          <option value="false">Not in stock</option>
+        </select>
+        {/* {toyLabels &&
                     <select
                         multiple
                         name="labels"
@@ -59,9 +80,9 @@ export function ToyFilter({ filterBy, onSetFilter, sortBy, onSetSort, toyLabels 
                             ))}
                         </>
                     </select>
-                }
-            </form>
-            <ToySort sortBy={sortBy} onSetSort={onSetSort} />
-        </section>
-    )
+                } */}
+      </form>
+      {/* <ToySort sortBy={sortBy} onSetSort={onSetSort} /> */}
+    </section>
+  )
 }

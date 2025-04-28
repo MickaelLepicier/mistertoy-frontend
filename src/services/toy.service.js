@@ -2,6 +2,7 @@ import { storageService } from './async-storage.service'
 import { utilService } from './util.service'
 
 const TOY_DB = 'toyDB'
+const PAGE_SIZE = 4
 
 const labels = [
   'On wheels',
@@ -28,7 +29,9 @@ export const toyService = {
   getToyLabelCounts
 }
 
-function query(filterBy = {}, sortBy = {}) {
+//TODO - fix Bugs with the filter and with PopUp add
+
+function query(filterBy = {}, sortBy = {}, pageIdx = 0) {
   return storageService.query(TOY_DB).then((toys) => {
     let toysToShow = [...toys]
 
@@ -37,9 +40,38 @@ function query(filterBy = {}, sortBy = {}) {
       toysToShow = toysToShow.filter((toy) => regExp.test(toy.name))
     }
 
-    // TODO - after I will make the filterBy page I will add more
+    console.log('filterBy: ',typeof filterBy.inStock)
+    // Filter by inStock
+    if (typeof filterBy.inStock === 'boolean') {
+      // filterBy.inStock
+      console.log('stock: ')
+      toysToShow = toysToShow.filter(
+        (toy) => toy.inStock === JSON.parse(filterBy.inStock)
+      )
+    }
 
-    // if()
+    // Filter by labels
+    if (filterBy.labels?.length) {
+      toysToShow = toysToShow.filter((toy) =>
+        filterBy.labels.every((label) => toy.labels.includes(label))
+      )
+    }
+
+    // Sort
+    if (sortBy.type) {
+      const dir = +sortBy.desc
+      toysToShow.sort((a, b) => {
+        if (sortBy.type === 'name') {
+          return a.name.localeCompare(b.name) * dir
+        } else if (sortBy.type === 'price' || sortBy.type === 'createdAt') {
+          return (a[sortBy.type] - b[sortBy.type]) * dir
+        }
+      })
+    }
+
+    // Pagination
+    const startIdx = pageIdx * PAGE_SIZE
+    toysToShow = toysToShow.slice(startIdx, startIdx + PAGE_SIZE)
 
     return toysToShow
   })
