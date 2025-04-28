@@ -29,8 +29,6 @@ export const toyService = {
   getToyLabelCounts
 }
 
-//TODO - fix Bugs with the filter and with PopUp add
-
 function query(filterBy = {}, sortBy = {}, pageIdx = 0) {
   return storageService.query(TOY_DB).then((toys) => {
     let toysToShow = [...toys]
@@ -40,11 +38,8 @@ function query(filterBy = {}, sortBy = {}, pageIdx = 0) {
       toysToShow = toysToShow.filter((toy) => regExp.test(toy.name))
     }
 
-    console.log('filterBy: ',typeof filterBy.inStock)
     // Filter by inStock
     if (typeof filterBy.inStock === 'boolean') {
-      // filterBy.inStock
-      console.log('stock: ')
       toysToShow = toysToShow.filter(
         (toy) => toy.inStock === JSON.parse(filterBy.inStock)
       )
