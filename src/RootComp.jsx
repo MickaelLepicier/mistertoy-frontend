@@ -24,7 +24,7 @@ import { ToyEdit } from './cmps/ToyEdit'
 
 function App() {
   const style = {
-    minHeight: 'calc(100vh - 250px)'
+    minHeight: 'calc(100vh - 228px)'
   }
 
   return (

@@ -4,7 +4,6 @@ import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { toyService } from '../services/toy.service'
 import { saveToy } from '../store/toy/toyActions'
 
-// TODO - fix bugs: multiple, and AppFooter layout
 export function ToyEdit() {
   const [toyToEdit, setToyToEdit] = useState(toyService.getEmptyToy())
   const [labels, setLabels] = useState([])
@@ -49,10 +48,15 @@ export function ToyEdit() {
     } else if (type === 'number') {
       fieldValue = +value
     } else if (type === 'select-multiple') {
-        fieldValue = [...target.selectedOptions].map((option) => option.value)
+      // each click it adds
+      // const isAlreadySelected = toyToEdit.labels.includes(value)
+      // fieldValue = isAlreadySelected
+      //   ? toyToEdit.labels.filter((label) => label !== value)
+      //   : [...toyToEdit.labels, value]
+      fieldValue = [...target.selectedOptions].map((option) => option.value)
     }
-    
-    console.log('fieldValue: ',fieldValue)
+
+    console.log('fieldValue: ', fieldValue)
     setToyToEdit((prevToy) => ({
       ...prevToy,
       [name]: fieldValue
