@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
-import { toyService } from '../services/toy.service'
+import { toyService } from '../services/toy.service.remote'
 import { saveToy } from '../store/toy/toyActions'
 
 export function ToyEdit() {

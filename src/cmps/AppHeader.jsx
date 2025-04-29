@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import { setFilter, setPageIdx, setSort } from '../store/toy/toyActions'
 import { ToyFilter } from './ToyFilter'
-import { toyService } from '../services/toy.service'
+import { toyService } from '../services/toy.service.remote'
 import { useEffect, useState } from 'react'
 import { ToySort } from './ToySort'
 

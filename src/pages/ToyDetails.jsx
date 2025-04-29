@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import { toyService } from '../services/toy.service'
+import { toyService } from '../services/toy.service.remote'
 import { Loader } from '../cmps/Loader'
 import { PopUp } from '../cmps/PopUp'
 import { Chat } from '../cmps/Chat'

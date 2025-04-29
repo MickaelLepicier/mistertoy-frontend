@@ -1,4 +1,4 @@
-import { toyService } from '../../services/toy.service'
+import { toyService } from '../../services/toy.service.remote'
 
 // Toys
 export const SET_TOYS = 'SET_TOYS'

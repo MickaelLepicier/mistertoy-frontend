@@ -1,4 +1,4 @@
-import { toyService } from '../../services/toy.service'
+import { toyService } from '../../services/toy.service.remote'
 import { store } from '../store'
 import {
   SET_TOYS,
@@ -79,5 +79,6 @@ export function setSort(sortBy = toyService.getDefaultSort()) {
 }
 
 export function setPageIdx(pageIdx = 0) {
+  if(pageIdx >= 3) pageIdx = 0
   store.dispatch({ type: SET_PAGE_IDX, pageIdx })
 }

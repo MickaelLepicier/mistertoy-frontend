@@ -24,8 +24,8 @@ export const toyService = {
   getToyLabelCounts
 }
 
-function query(filterBy = {}, sortBy) {
-  return httpService.get(BASE_URL, { filterBy, sortBy })
+function query(filterBy = {}, sortBy, pageIdx) {
+  return httpService.get(BASE_URL, { filterBy, sortBy, pageIdx })
   // return axios.get(BASE_URL, {params: { filterBy, sortBy, pageIdx }})
 }
 

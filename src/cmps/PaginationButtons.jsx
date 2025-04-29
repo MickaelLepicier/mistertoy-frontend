@@ -1,6 +1,8 @@
 import { setPageIdx } from '../store/toy/toyActions'
 
 export function PaginationButtons({ pageIdx }) {
+
+
   return (
     <div className="pagination">
       <button onClick={() => setPageIdx(pageIdx - 1)} disabled={pageIdx === 0}>
