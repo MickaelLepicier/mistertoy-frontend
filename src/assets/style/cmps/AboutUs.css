@@ -1,5 +1,6 @@
 .about-page{
     justify-items: center;
+    margin-block-end: 5em;
 }
 
 .about-page h1{
@@ -9,5 +10,10 @@
 
 .about-page p {
     max-width: 55%;
+    /* text-align: center;  */
+}
+
+.about-page ul {
+    max-width: 50%;
     /* text-align: center;  */
 }

@@ -12,25 +12,15 @@ import { ToyIndex } from './pages/ToyIndex'
 import { ToyDetails } from './pages/ToyDetails'
 import { ToyEdit } from './cmps/ToyEdit'
 
-
-//TODOS - Add CSS
-
-// imports:
-
-// ToyDetails
-// ToyEdit
-
-// TODO keep going ;)
-
 function App() {
   const style = {
-    minHeight: 'calc(100vh - 228px)'
+    minHeight: '85vh'
   }
 
   return (
     <Provider store={store}>
       <Router>
-        <section >
+        <section>
           <AppHeader />
           <main style={style}>
             <Routes>
@@ -40,7 +30,6 @@ function App() {
               <Route path="/toy/:toyId" element={<ToyDetails />} />
               <Route path="/toy/edit/:toyId?" element={<ToyEdit />} />
               {/* <Route element={<ToyDashboard />} path="/dashboard" /> */}
-              
             </Routes>
           </main>
           <AppFooter />

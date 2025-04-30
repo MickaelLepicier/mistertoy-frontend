@@ -4,6 +4,7 @@
 
 .toy-index .pagination {
   text-align: center;
+  margin-block-end: 5em;
 }
 
 .toy-index .loader-container {
