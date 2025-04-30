@@ -1,3 +1,5 @@
+import { GoogleMaps } from '../cmps/GoogleMap'
+
 export function AboutUs() {
   return (
     <section className="about-page">
@@ -46,6 +48,8 @@ export function AboutUs() {
         believe that wrapping should only hint at its content, to allow you and
         your children to appreciate the gift even more.
       </p>
+
+      <GoogleMaps />
     </section>
   )
 }
