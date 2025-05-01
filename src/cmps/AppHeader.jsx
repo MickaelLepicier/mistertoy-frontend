@@ -37,7 +37,7 @@ export function AppHeader() {
 
       <header>
         Fast and free delivery to collection points throughout the country for
-        purchases over 299 NIS
+        purchases over 99$
       </header>
 
       <main>

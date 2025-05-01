@@ -1,16 +1,7 @@
 import { httpService } from './http.service'
 
 const BASE_URL = 'toy/'
-const labels = [
-  'On wheels',
-  'Box game',
-  'Art',
-  'Baby',
-  'Doll',
-  'Puzzle',
-  'Outdoor',
-  'Battery Powered'
-]
+export const labels = ['On wheels', 'Box game', 'Art', 'Baby', 'Doll', 'Puzzle', 'Outdoor', 'Battery Powered']
 
 export const toyService = {
   query,
@@ -21,7 +12,9 @@ export const toyService = {
   getDefaultFilter,
   getDefaultSort,
   getToyLabels,
-  getToyLabelCounts
+  getToyLabelCounts,
+  getPricePerLabelStats,
+  getInStockPerLabelStats
 }
 
 function query(filterBy = {}, sortBy, pageIdx) {
@@ -72,6 +65,51 @@ function getToyLabelCounts() {
   return httpService.get(BASE_URL + 'labels/count')
 }
 
+function getPricePerLabelStats() {
+  return query().then((toys) => {
+    const stats = _getStatsPerLabel(
+      toys,
+      (toy) => ({ sum: toy.price, count: 1 }),
+      (sum, count) => Number((sum / count).toFixed(1))
+    )
+    // console.log('avgPricesPerLabel: ', stats)
+    return stats
+  })
+}
+
+function getInStockPerLabelStats() {
+  return query().then((toys) => {
+    const stats = _getStatsPerLabel(
+      toys,
+      (toy) => ({ sum: toy.inStock ? 1 : 0, count: 1 }),
+      (sum, count) => Number(((sum / count) * 100).toFixed(1))
+    )
+    // console.log('inStockPerLabel: ', stats)
+    return stats
+  })
+}
+
+function _getStatsPerLabel(toys, valueExtractor, resultFormatter) {
+  const labelStats = {}
+
+  toys.forEach((toy) => {
+    toy.labels.forEach((label) => {
+      if (!labelStats[label]) labelStats[label] = { sum: 0, count: 0 }
+      const { sum, count } = valueExtractor(toy)
+      labelStats[label].sum += sum
+      labelStats[label].count += count
+    })
+  })
+
+  const formattedStats = {}
+  for (const label in labelStats) {
+    const { sum, count } = labelStats[label]
+    formattedStats[label] = resultFormatter(sum, count)
+  }
+
+  return formattedStats
+}
+
 function _getRandomLabels() {
   const labelsCopy = [...labels]
   const randomLabels = []
@@ -81,3 +119,9 @@ function _getRandomLabels() {
   }
   return randomLabels
 }
+
+
+
+
+
+

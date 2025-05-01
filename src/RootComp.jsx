@@ -11,6 +11,7 @@ import { AboutUs } from './pages/AboutUs'
 import { ToyIndex } from './pages/ToyIndex'
 import { ToyDetails } from './pages/ToyDetails'
 import { ToyEdit } from './cmps/ToyEdit'
+import { ToyDashboard } from './pages/ToyDashboard'
 
 function App() {
   const style = {
@@ -29,7 +30,7 @@ function App() {
               <Route path="/toy" element={<ToyIndex />} />
               <Route path="/toy/:toyId" element={<ToyDetails />} />
               <Route path="/toy/edit/:toyId?" element={<ToyEdit />} />
-              {/* <Route element={<ToyDashboard />} path="/dashboard" /> */}
+              <Route path="/dashboard" element={<ToyDashboard />} />
             </Routes>
           </main>
           <AppFooter />
