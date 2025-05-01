@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
@@ -13,17 +12,31 @@ export function ToyEdit() {
   const { toyId } = useParams()
   const navigate = useNavigate()
 
+  const ToySchema = Yup.object().shape({
+    name: Yup.string().required('Name is required'),
+    price: Yup.number().required('Price is required').min(1, 'Must be at least 1'),
+    labels: Yup.array().of(Yup.string()),
+    inStock: Yup.boolean()
+  })
+
   useEffect(() => {
-    if (toyId) {
-      toyService
-        .getById(toyId)
-        .then(setInitialValues)
-        .catch((err) => {
-          console.error('Error loading toy:', err)
-          showErrorMsg('Toy not found')
-          navigate('/toy')
-        })
-    }
+    loadToy()
+    loadToyLabels()
+  }, [])
+
+  function loadToy() {
+    if (!toyId) return
+    toyService
+      .getById(toyId)
+      .then(setInitialValues)
+      .catch((err) => {
+        console.error('Error loading toy:', err)
+        showErrorMsg('Toy not found')
+        navigate('/toy')
+      })
+  }
+
+  function loadToyLabels() {
     toyService
       .getToyLabels()
       .then(setLabels)
@@ -32,14 +45,7 @@ export function ToyEdit() {
         showErrorMsg('Labels not found')
         navigate('/toy')
       })
-  }, [])
-
-  const ToySchema = Yup.object().shape({
-    name: Yup.string().required('Name is required'),
-    price: Yup.number().required('Price is required').min(1, 'Must be at least 1'),
-    labels: Yup.array().of(Yup.string()),
-    inStock: Yup.boolean()
-  })
+  }
 
   function onSubmit(values) {
     saveToy(values)
@@ -55,12 +61,7 @@ export function ToyEdit() {
   return (
     <section className="toy-edit">
       <h2>{toyId ? 'Edit' : 'Add'} Toy</h2>
-      <Formik
-        initialValues={initialValues}
-        enableReinitialize
-        validationSchema={ToySchema}
-        onSubmit={onSubmit}
-      >
+      <Formik initialValues={initialValues} enableReinitialize validationSchema={ToySchema} onSubmit={onSubmit}>
         {({ values, handleChange }) => (
           <Form>
             <div className="form-group">
@@ -106,153 +107,156 @@ export function ToyEdit() {
 
 
 
+// Without Formik and Yup
+/*
 
+import { useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
+import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
+import { toyService } from '../services/toy.service.remote'
+import { saveToy } from '../store/toy/toyActions'
 
-// import { useEffect, useState } from 'react'
-// import { useNavigate, useParams } from 'react-router-dom'
-// import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
-// import { toyService } from '../services/toy.service.remote'
-// import { saveToy } from '../store/toy/toyActions'
+export function ToyEdit() {
+  const [toyToEdit, setToyToEdit] = useState(toyService.getEmptyToy())
+  const [labels, setLabels] = useState([])
 
-// export function ToyEdit() {
-//   const [toyToEdit, setToyToEdit] = useState(toyService.getEmptyToy())
-//   const [labels, setLabels] = useState([])
+  const { toyId } = useParams()
+  const navigate = useNavigate()
 
-//   const { toyId } = useParams()
-//   const navigate = useNavigate()
+  useEffect(() => {
+    loadToy()
+    loadToyLabels()
+  }, [])
 
-//   useEffect(() => {
-//     loadToy()
-//     loadToyLabels()
-//   }, [])
+  function loadToy() {
+    if (!toyId) return
+    toyService
+      .getById(toyId)
+      .then(setToyToEdit)
+      .catch((err) => {
+        console.log('Had issues in toy edit:', err)
+        navigate('/toy')
+        showErrorMsg('Toy not found!')
+      })
+  }
 
-//   function loadToy() {
-//     if (!toyId) return
-//     toyService
-//       .getById(toyId)
-//       .then(setToyToEdit)
-//       .catch((err) => {
-//         console.log('Had issues in toy edit:', err)
-//         navigate('/toy')
-//         showErrorMsg('Toy not found!')
-//       })
-//   }
+  function loadToyLabels() {
+    toyService
+      .getToyLabels()
+      .then(setLabels)
+      .catch((err) => {
+        console.log('Had issues in toy edit:', err)
+        navigate('/toy')
+        showErrorMsg('Toy not found!')
+      })
+  }
 
-//   function loadToyLabels() {
-//     toyService
-//       .getToyLabels()
-//       .then(setLabels)
-//       .catch((err) => {
-//         console.log('Had issues in toy edit:', err)
-//         navigate('/toy')
-//         showErrorMsg('Toy not found!')
-//       })
-//   }
+  function handleChange({ target }) {
+    const { name, value, type, checked } = target
 
-//   function handleChange({ target }) {
-//     const { name, value, type, checked } = target
+    let fieldValue = value
+    if (type === 'checkbox') {
+      fieldValue = checked
+    } else if (type === 'number') {
+      fieldValue = +value
+    } else if (type === 'select-multiple') {
+      // each click it adds
+      // const isAlreadySelected = toyToEdit.labels.includes(value)
+      // fieldValue = isAlreadySelected
+      //   ? toyToEdit.labels.filter((label) => label !== value)
+      //   : [...toyToEdit.labels, value]
+      fieldValue = [...target.selectedOptions].map((option) => option.value)
+    }
 
-//     let fieldValue = value
-//     if (type === 'checkbox') {
-//       fieldValue = checked
-//     } else if (type === 'number') {
-//       fieldValue = +value
-//     } else if (type === 'select-multiple') {
-//       // each click it adds
-//       // const isAlreadySelected = toyToEdit.labels.includes(value)
-//       // fieldValue = isAlreadySelected
-//       //   ? toyToEdit.labels.filter((label) => label !== value)
-//       //   : [...toyToEdit.labels, value]
-//       fieldValue = [...target.selectedOptions].map((option) => option.value)
-//     }
+    console.log('fieldValue: ', fieldValue)
+    setToyToEdit((prevToy) => ({
+      ...prevToy,
+      [name]: fieldValue
+    }))
+  }
 
-//     console.log('fieldValue: ', fieldValue)
-//     setToyToEdit((prevToy) => ({
-//       ...prevToy,
-//       [name]: fieldValue
-//     }))
-//   }
+  function onSaveToy(ev) {
+    ev.preventDefault()
+    saveToy(toyToEdit)
+      .then((savedToy) => {
+        showSuccessMsg(`Toy ${savedToy._id} saved successfully`)
+        navigate('/toy')
+      })
+      .catch((err) => {
+        showErrorMsg('Cannot save toy')
+      })
+  }
 
-//   function onSaveToy(ev) {
-//     ev.preventDefault()
-//     saveToy(toyToEdit)
-//       .then((savedToy) => {
-//         showSuccessMsg(`Toy ${savedToy._id} saved successfully`)
-//         navigate('/toy')
-//       })
-//       .catch((err) => {
-//         showErrorMsg('Cannot save toy')
-//       })
-//   }
+  const priceValidations = {
+    min: '1',
+    required: true
+  }
 
-//   const priceValidations = {
-//     min: '1',
-//     required: true
-//   }
+  return (
+    <section className="toy-edit">
+      <h2>{toyToEdit._id ? 'Edit' : 'Add'} Toy</h2>
+      <form onSubmit={onSaveToy}>
+        <div className="form-group">
+          <label htmlFor="name">Name:</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            value={toyToEdit.name}
+            onChange={handleChange}
+            required
+          />
+        </div>
 
-//   return (
-//     <section className="toy-edit">
-//       <h2>{toyToEdit._id ? 'Edit' : 'Add'} Toy</h2>
-//       <form onSubmit={onSaveToy}>
-//         <div className="form-group">
-//           <label htmlFor="name">Name:</label>
-//           <input
-//             type="text"
-//             id="name"
-//             name="name"
-//             value={toyToEdit.name}
-//             onChange={handleChange}
-//             required
-//           />
-//         </div>
+        <div className="form-group">
+          <label htmlFor="price">Price:</label>
+          <input
+            type="number"
+            id="price"
+            name="price"
+            value={toyToEdit.price || ''}
+            {...priceValidations}
+            // min="1"
+            // required
+            onChange={handleChange}
+          />
+        </div>
 
-//         <div className="form-group">
-//           <label htmlFor="price">Price:</label>
-//           <input
-//             type="number"
-//             id="price"
-//             name="price"
-//             value={toyToEdit.price || ''}
-//             {...priceValidations}
-//             // min="1"
-//             // required
-//             onChange={handleChange}
-//           />
-//         </div>
+        <div className="form-group">
+          <label htmlFor="labels">Labels:</label>
+          <select
+            id="labels"
+            name="labels"
+            multiple
+            value={toyToEdit.labels}
+            onChange={handleChange}
+          >
+            {labels.map((label) => (
+              <option key={label} value={label}>
+                {label}
+              </option>
+            ))}
+          </select>
+        </div>
 
-//         <div className="form-group">
-//           <label htmlFor="labels">Labels:</label>
-//           <select
-//             id="labels"
-//             name="labels"
-//             multiple
-//             value={toyToEdit.labels}
-//             onChange={handleChange}
-//           >
-//             {labels.map((label) => (
-//               <option key={label} value={label}>
-//                 {label}
-//               </option>
-//             ))}
-//           </select>
-//         </div>
+        {toyToEdit._id && (
+          <div className="form-group">
+            <label>
+              <input
+                type="checkbox"
+                name="inStock"
+                checked={toyToEdit.inStock}
+                onChange={handleChange}
+              />
+              In Stock
+            </label>
+          </div>
+        )}
 
-//         {toyToEdit._id && (
-//           <div className="form-group">
-//             <label>
-//               <input
-//                 type="checkbox"
-//                 name="inStock"
-//                 checked={toyToEdit.inStock}
-//                 onChange={handleChange}
-//               />
-//               In Stock
-//             </label>
-//           </div>
-//         )}
+        <button>{toyToEdit._id ? 'Update Toy' : 'Add'}</button>
+      </form>
+    </section>
+  )
+}
 
-//         <button>{toyToEdit._id ? 'Update Toy' : 'Add'}</button>
-//       </form>
-//     </section>
-//   )
-// }
+*/
