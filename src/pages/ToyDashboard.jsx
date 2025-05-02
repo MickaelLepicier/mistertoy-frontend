@@ -22,7 +22,7 @@ function loadInStockStats(){
     toyService.getInStockPerLabelStats().then(setInStockStats)
 }
 
-if(!priceStats) return <Loader/>
+if(!priceStats || !inStockStats) return <Loader/>
 
 return (
     <section>

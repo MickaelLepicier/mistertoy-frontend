@@ -7,6 +7,7 @@ export const utilService = {
     animateCSS,
     debounce,
     getAssetSrc,
+    firstLetterUpperCase,
 }
 
 function makeId(length = 6) {
@@ -112,4 +113,8 @@ function getAssetSrc(name) {
     const modules = import.meta.globEager('/src/assets/img/*')
     const mod = modules[path]
     return mod.default
+}
+
+function firstLetterUpperCase(str){
+    return str.charAt(0).toUpperCase() + str.slice(1)
 }

@@ -40,12 +40,13 @@ export function MyChart({ priceStats, inStockStats }) {
   const priceDataStats = getData(labels, 'Average Price by $', dataPrice)
   const inStockDataStats = getData(labels, 'In-stock by %', dataInStock)
 
+  
   return (
     <section className="chart-container">
       <h2>Average toy price per label</h2>
       <Pie className="chart" data={priceDataStats} />
 
-      <h2>Percentage of toys that are in-stock by labels</h2>
+      <h2>Percentage of toys that are in-stock per labels</h2>
       <Doughnut className="chart" data={inStockDataStats} />
     </section>
   )

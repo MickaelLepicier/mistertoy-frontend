@@ -14,7 +14,7 @@ export function ToyList({ onRemoveToy, toys }) {
     </li>
   ))
 
-//   console.log('elLis:', elLis)
+  //   console.log('elLis:', elLis)
   return (
     <section className="toy-list container">
       <ul>{elLis}</ul>
