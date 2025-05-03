@@ -1,7 +1,10 @@
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 
 export function ToyPreview({ toy }) {
+    const {t} = useTranslation()
+
     const [isImgLoading, setImgLoading] = useState(true)
 
     function handleImageLoad() {
@@ -20,9 +23,9 @@ export function ToyPreview({ toy }) {
                         style={{ display: isImgLoading ? 'none' : 'block' }}
                     />
                 </div>
-                <h1>Price: ${toy.price}</h1>
+                <h1>{t('price')}: ${toy.price}</h1>
                 <h1 className={toy.inStock ? 'green' : 'red'}>
-                    {toy.inStock ? 'In stock' : 'Not in stock'}
+                    {toy.inStock ? t('in_stock') : t('not_in_stock')}
                 </h1>
             </article>
         </Link>

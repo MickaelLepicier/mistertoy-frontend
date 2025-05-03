@@ -7,16 +7,19 @@ import { ToyList } from '../cmps/ToyList'
 import { PopUp } from '../cmps/PopUp'
 import { PaginationButtons } from '../cmps/PaginationButtons'
 import { Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 export function ToyIndex() {
+  const {t} = useTranslation()
+
   const toys = useSelector((storeState) => storeState.toyModule.toys)
   const filterBy = useSelector((storeState) => storeState.toyModule.filterBy)
   const sortBy = useSelector((storeState) => storeState.toyModule.sortBy)
   const isLoading = useSelector((storeState) => storeState.toyModule.isLoading)
   const pageIdx = useSelector((storeState) => storeState.toyModule.pageIdx)
 
-  //   const [pageIdx, setPageIdx] = useState(0)
   const [toyLabels, setToyLabels] = useState()
+ 
 
   useEffect(() => {
     loadToys(pageIdx).catch((err) => {
@@ -39,18 +42,18 @@ export function ToyIndex() {
     <section className="toy-index">
       <div style={{ marginBlockStart: '0.5em', textAlign: 'center' }}>
         <button style={{ marginInline: 0 }}>
-          <Link to="/toy/edit">Add Toy</Link>
+          <Link to="/toy/edit">{t('add_toy')}</Link>
         </button>
       </div>
 
-      {isLoading && <Loader />}
+      {isLoading && <Loader text={t('loading')}/>}
       {!isLoading && <ToyList toys={toys} onRemoveToy={onRemoveToy} />}
 
       {<PaginationButtons pageIdx={pageIdx} />}
 
       <PopUp footer={<footer>An Image</footer>} isOpen={pageIdx === 2}>
         <img src="./img/HERO_IMG.jpg" />
-        <button>Send</button>
+        <button>{t('send')}</button>
       </PopUp>
     </section>
   )

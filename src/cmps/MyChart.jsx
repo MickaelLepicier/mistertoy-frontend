@@ -1,6 +1,7 @@
 import React from 'react'
 import { Chart as ChartJS, ArcElement,  Tooltip, Legend } from 'chart.js'
 import { Pie, Doughnut } from 'react-chartjs-2'
+import { useTranslation } from 'react-i18next'
 
 ChartJS.register( ArcElement, Tooltip, Legend)
 
@@ -33,6 +34,8 @@ const borderColor = [
 ]
 
 export function MyChart({ priceStats, inStockStats }) {
+  const {t} = useTranslation()
+  
   const labels = Object.keys(priceStats)
   const dataPrice = Object.values(priceStats)
   const dataInStock = Object.values(inStockStats)
@@ -43,10 +46,10 @@ export function MyChart({ priceStats, inStockStats }) {
   
   return (
     <section className="chart-container">
-      <h2>Average toy price per label</h2>
+      <h2>{t('msg_chart_h_1')}</h2>
       <Pie className="chart" data={priceDataStats} />
 
-      <h2>Percentage of toys that are in-stock per labels</h2>
+      <h2>{t('msg_chart_h_2')}</h2>
       <Doughnut className="chart" data={inStockDataStats} />
     </section>
   )

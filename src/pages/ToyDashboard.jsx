@@ -2,12 +2,13 @@ import { useEffect, useState } from 'react'
 import { MyChart } from '../cmps/MyChart'
 import { Loader } from '../cmps/Loader'
 import { toyService } from '../services/toy.service.remote'
+import { useTranslation } from 'react-i18next'
 
 export function ToyDashboard() {
+  const {t} = useTranslation()
 
 const [priceStats, setPriceStats] = useState()
 const [inStockStats, setInStockStats] = useState()
-
 
 useEffect(()=>{
     loadPriceStats()
@@ -22,7 +23,7 @@ function loadInStockStats(){
     toyService.getInStockPerLabelStats().then(setInStockStats)
 }
 
-if(!priceStats || !inStockStats) return <Loader/>
+if(!priceStats || !inStockStats) return <Loader text={t('loading')}/>
 
 return (
     <section>

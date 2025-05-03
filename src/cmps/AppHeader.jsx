@@ -5,12 +5,19 @@ import { ToyFilter } from './ToyFilter'
 import { toyService } from '../services/toy.service.remote'
 import { useEffect, useState } from 'react'
 import { ToySort } from './ToySort'
+import { useTranslation } from 'react-i18next'
 
 export function AppHeader() {
   const filterBy = useSelector((storeState) => storeState.toyModule.filterBy)
   const sortBy = useSelector((storeState) => storeState.toyModule.sortBy)
 
   const [toyLabels, setToyLabels] = useState()
+
+  const { t, i18n } = useTranslation()
+  const lngs = {
+    en: { nativeName: 'EN' },
+    fr: { nativeName: 'FR' }
+  }
 
   useEffect(() => {
     toyService
@@ -33,14 +40,24 @@ export function AppHeader() {
 
   return (
     <section className="app-header">
+      <header>{t('msg_top_header')}</header>
       {/* CartButton */}
 
-      <header>
-        Fast and free delivery to collection points throughout the country for
-        purchases over 99$
-      </header>
-
       <main>
+        <div>
+          {Object.keys(lngs).map((lng) => (
+            <button
+              className="btn-lng"
+              // type="submit"
+              key={lng}
+              onClick={() => i18n.changeLanguage(lng)}
+              disabled={i18n.resolvedLanguage === lng}
+            >
+              {lngs[lng].nativeName}
+            </button>
+          ))}
+        </div>
+
         <ToyFilter
           filterBy={filterBy}
           onSetFilter={onSetFilter}
@@ -52,10 +69,10 @@ export function AppHeader() {
         <div className="logo">MISTER TOY</div>
 
         <nav>
-          <NavLink to="/">Home</NavLink>
-          <NavLink to="/toy">Toys</NavLink>
-          <NavLink to="/dashboard">Dashboard</NavLink>
-          <NavLink to="/about">About</NavLink>
+          <NavLink to="/">{t('home')}</NavLink>
+          <NavLink to="/toy">{t('toys')} </NavLink>
+          <NavLink to="/dashboard">{t('dashboard')} </NavLink>
+          <NavLink to="/about">{t('about')} </NavLink>
         </nav>
       </main>
 

@@ -22,6 +22,8 @@ import {
 } from '@mui/material'
 
 export function ToyEdit() {
+    const { t } = useTranslation()
+  
   const [initialValues, setInitialValues] = useState(toyService.getEmptyToy())
   const [labels, setLabels] = useState([])
   const { toyId } = useParams()
@@ -170,13 +172,13 @@ export function ToyEdit() {
               <div className="form-group">
                 <label>
                   <Field type="checkbox" name="inStock" />
-                  In Stock
+                  {t('in Stock')}
                 </label>
               </div>
             )}
 
             <Button variant="contained" type="submit">
-              {toyId ? 'Update Toy' : 'Add Toy'}
+              {toyId ? t('update_toy') : t('add_toy')}
             </Button>
           </Form>
         )}

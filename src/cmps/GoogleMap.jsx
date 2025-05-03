@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api'
+import { useTranslation } from 'react-i18next'
 
 const containerStyle = {
   width: '80vw',
@@ -16,6 +17,8 @@ const alts = {
 }
 
 export function GoogleMaps() {
+  const {t} = useTranslation()
+
   const [center, setCenter] = useState(alts.rehovot)
   const [zoom, setZoom] = useState(10)
 
@@ -42,7 +45,7 @@ export function GoogleMaps() {
 
   return isLoaded ? (
     <section>
-      <h2>Location of branches</h2>
+      <h2>{t('location')}</h2>
 
       <GoogleMap
         mapContainerStyle={containerStyle}

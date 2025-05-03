@@ -4,8 +4,11 @@ import { toyService } from '../services/toy.service.remote'
 import { Loader } from '../cmps/Loader'
 import { PopUp } from '../cmps/PopUp'
 import { Chat } from '../cmps/Chat'
+import { useTranslation } from 'react-i18next'
 
 export function ToyDetails() {
+  const {t} = useTranslation()
+
   const [toy, setToy] = useState(null)
   const [isChatOpen, setIsChatOpen] = useState(false)
   const { toyId } = useParams()
@@ -26,34 +29,34 @@ export function ToyDetails() {
       })
   }
 
-  if (!toy) return <Loader />
+  if (!toy) return <Loader text={t('loading')} />
   const formattedDate = new Date(toy.createdAt).toLocaleString('he')
 
   return (
     <section className="toy-details" style={{ textAlign: 'center' }}>
 
       <h1>
-        Toy name: <span>{toy.name}</span>
+        {t('toy_name')}: <span>{toy.name}</span>
       </h1>
       <h1>
-        Toy price: <span>${toy.price}</span>
+      {t('toy_price')}: <span>${toy.price}</span>
       </h1>
       <h1>
-        Labels: <span>{toy.labels.join(' ,')}</span>
+      {t('labels')}: <span>{toy.labels.join(' ,')}</span>
       </h1>
       <h1>
-        Created At: <span>{formattedDate}</span>
+      {t('created_at')}: <span>{formattedDate}</span>
       </h1>
       <h1 className={toy.inStock ? 'green' : 'red'}>
-        {toy.inStock ? 'In stock' : 'Not in stock'}
+        {toy.inStock ? t('in_stock') : t('not_in_stock')}
       </h1>
       <button className="back-btn">
-        <Link to="/toy">Back</Link>
+        <Link to="/toy">{t('back')}</Link>
       </button>
       <section>
         <PopUp
-          header={<h3>Chat About {toy.name}s</h3>}
-          footer={<h4>&copy; 2025-9999 Toys INC.</h4>}
+          header={<h3>{t('chat_about')} {toy.name}s</h3>}
+          footer={<h4>&copy; 2025-9999 {t('toys')} INC.</h4>}
           onClose={() => setIsChatOpen(false)}
           isOpen={isChatOpen}
         >
@@ -63,7 +66,7 @@ export function ToyDetails() {
 
       {!isChatOpen && (
         <button onClick={() => setIsChatOpen(true)} className="open-chat">
-          Chat
+          {t('chat')}
         </button>
       )}
     </section>

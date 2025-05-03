@@ -1,6 +1,9 @@
 import { useState, useEffect, useRef } from 'react'
+import { useTranslation } from 'react-i18next'
 
 export function Chat() {
+    const {t} = useTranslation()
+
     const [msgs, setMsgs] = useState([])
     const [userInput, setUserInput] = useState('')
     const msgsRef = useRef()
@@ -41,10 +44,10 @@ export function Chat() {
         <div className="chat-container">
             <div ref={msgsRef} className="chat-messages">
                 {msgs.map(msg => (
-                    <div key={msg.id} className={`message ${msg.from === 'user' ? 'user' : 'other'}`}>
+                    <div key={msg.id} className={`message ${msg.from === 'user' ? t('user') : t('other')}`}>
                         <section>
                             <span className="timestamp">{msg.timestamp}</span>
-                            <h3>{msg.from === 'user' ? 'You' : msg.from}: </h3>
+                            <h3>{msg.from === 'user' ? t('you') : msg.from}: </h3>
                         </section>
                         <p>{msg.text}</p>
                     </div>
@@ -58,7 +61,7 @@ export function Chat() {
                     onChange={(ev) => setUserInput(ev.target.value)}
                     placeholder="Type your message..."
                 />
-                <button type="submit">Send</button>
+                <button type="submit">{t('send')}</button>
             </form>
         </div>
     )

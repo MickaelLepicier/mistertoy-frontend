@@ -1,52 +1,47 @@
+import { useTranslation } from 'react-i18next'
 import { GoogleMaps } from '../cmps/GoogleMap'
 
 export function AboutUs() {
+  const {t} = useTranslation()
+
   return (
     <section className="about-page">
-      <h1>About Us</h1>
-      <h1>Welcome to Mister-Toy</h1>
+      <h1>{t('About Us')}</h1>
+      <h1>{t('welcome_to')} Mister-Toy</h1>
       <p>
-        Our store was founded on April 7, 2011, and since then has been
-        providing the highest level of service, offering the highest quality
-        products in the toy industry, and maintaining fair prices.
+       { t('msg_p_1')}
       </p>
-      <p>Our motto is Quality + Service + Price:</p>
+      <p>{t('msg_p_2')}</p>
       <ul>
-        <li>Top-quality products from leading brands around the world</li>
+        <li>{t('msg_p_3')}</li>
         <li>
-          Professional service, with recommendations on toys, unique gift
-          wrapping, and fast deliveries
+        {t('msg_p_4')}
         </li>
-        <li>Fair prices compared to stores across the country</li>
+        <li>{t('msg_p_5')}</li>
       </ul>
       <p>
-        At our store, you can find: wooden toys, games, thinking games, didactic
-        toys, Waldorf toys, puzzles, party games, science games, robotics, arts
-        and crafts, and more.
+      {t('msg_p_6')}
+        
       </p>
       <p>
-        All our products come from the world's leading brands: Melissa & Doug,
-        BRIO World, Janod, Linda Toys, Ravensburger, Buki France, Wonder World,
-        Classic World, Phoohi, Avenir, Matador, Silverlit, Rubiks, SmartGames,
-        Foxmind, Kodkod, Carrera, Machina, Crayola, thinkfun, 4M, dolce, Bgifts,
-        CASDON, and more.
+      {t('msg_p_7')}
+
+        
       </p>
       <p>
-        All products are manufactured at the highest standards with the
-        strictest certifications worldwide.
+      {t('msg_p_8')}
+
+        
       </p>
-      <p>All products are safe for use.</p>
-      <h3>Why is the store called "Mister-Toy"?</h3>
+      <p>{t('msg_p_9')}</p>
+      <h3>{t('msg_p_10')}</h3>
       <p>
-        The meaning of the word "Mister-Toy" in Hebrew hints at a "hint of
-        light"! Our gift wrapping suggests that there's something special
-        underneath, and when the children open their presents — you can see the
-        light in their eyes.
+      {t('msg_p_11')}
+        
       </p>
       <p>
-        We chose to wrap gifts aesthetically to emphasize the gift inside. We
-        believe that wrapping should only hint at its content, to allow you and
-        your children to appreciate the gift even more.
+      {t('msg_p_12')}
+        
       </p>
 
       <GoogleMaps />

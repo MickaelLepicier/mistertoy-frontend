@@ -1,15 +1,16 @@
+import { useTranslation } from 'react-i18next'
 import { setPageIdx } from '../store/toy/toyActions'
 
 export function PaginationButtons({ pageIdx }) {
-
+const {t} = useTranslation()
 
   return (
     <div className="pagination">
       <button onClick={() => setPageIdx(pageIdx - 1)} disabled={pageIdx === 0}>
-        Previous
+        {t('previous')}
       </button>
       {pageIdx + 1}
-      <button onClick={() => setPageIdx(pageIdx + 1)}>Next</button>
+      <button onClick={() => setPageIdx(pageIdx + 1)}>{t('next')}</button>
     </div>
   )
 }
