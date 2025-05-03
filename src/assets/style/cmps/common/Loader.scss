@@ -1,0 +1,41 @@
+
+$loader-color: var(--clr2); // Or define a SCSS variable like $clr2 if you're managing your palette via SCSS
+
+.loader-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .animation {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    span {
+      display: inline-block;
+      border-radius: 50vw;
+      background-color: $loader-color;
+      width: 2em;
+      height: 2em;
+      animation: bounce 1.5s infinite ease-in-out both;
+
+      &:nth-child(1) {
+        animation-delay: -0.32s;
+      }
+
+      &:nth-child(2) {
+        animation-delay: -0.16s;
+      }
+    }
+  }
+
+  p {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+      'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    line-height: 1.5em;
+    letter-spacing: 1px;
+    text-align: center;
+    margin: 1rem 0 0;
+    max-width: 50ch;
+  }
+}

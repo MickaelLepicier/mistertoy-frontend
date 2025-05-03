@@ -1,8 +1,0 @@
-.chart-container{
-    justify-items: center;
-}
-
-.chart-container .chart{
-    max-height: 60vh;
-    margin-block-end: 5em;
-}
