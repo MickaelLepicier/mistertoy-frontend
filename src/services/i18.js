@@ -2,6 +2,10 @@ import i18n from 'i18next'
 import LanguageDetector from 'i18next-browser-languagedetector'
 import { initReactI18next } from 'react-i18next'
 
+// TODO:
+// The bug - when refresh the web is en
+// Put something in localStorage and like that the lng will be fr after refresh
+
 i18n
   .use(LanguageDetector)
   .use(initReactI18next)
