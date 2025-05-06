@@ -1,4 +1,18 @@
 
+// TODOs:
+
+// [] make the footer on the bottom of the page
+// [] check which code is repeated and use helpers to make it shorter
+// [] add colors to vars.scss
+// [] maybe put more animations in the animations.scss
+// [] add text-related styles (fonts, sizes, line-heights, etc.) in the typography.scss
+// [] 
+// [] 
+// [] use scss variables, mixins, functions
+// [] app for tablet & mobile
+
+
+
 /* Setup */
 @import 'setup/vars.scss';
 @import 'setup/typography.scss';
@@ -30,3 +44,5 @@
 @import 'cmps/Chat.scss';
 @import 'cmps/ToyEdit.scss';
 @import 'cmps/ToyDashboard.scss';
+
+
