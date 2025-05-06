@@ -15,12 +15,22 @@ useEffect(()=>{
     loadInStockStats()
 },[])
 
-function loadPriceStats(){
-    toyService.getPricePerLabelStats().then(setPriceStats)
+async function loadPriceStats(){
+  try {
+    const stats = await toyService.getPricePerLabelStats()
+    setPriceStats(stats)
+  } catch (err) {
+    console.error('Cannot load price stats', err)
+  }
 }
 
-function loadInStockStats(){
-    toyService.getInStockPerLabelStats().then(setInStockStats)
+async function loadInStockStats(){
+  try {
+    const stats = await toyService.getInStockPerLabelStats()
+    setInStockStats(stats)
+  } catch (err) {
+    console.error('Cannot load in-stock stats', err)
+  }
 }
 
 if(!priceStats || !inStockStats) return <Loader text={t('loading')}/>

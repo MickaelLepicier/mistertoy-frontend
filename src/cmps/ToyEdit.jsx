@@ -23,8 +23,8 @@ import {
 } from '@mui/material'
 
 export function ToyEdit() {
-    const { t } = useTranslation()
-  
+  const { t } = useTranslation()
+
   const [initialValues, setInitialValues] = useState(toyService.getEmptyToy())
   const [labels, setLabels] = useState([])
   const { toyId } = useParams()
@@ -32,7 +32,9 @@ export function ToyEdit() {
 
   const ToySchema = Yup.object().shape({
     name: Yup.string().required('Name is required'),
-    price: Yup.number().required('Price is required').min(1, 'Must be at least 1'),
+    price: Yup.number()
+      .required('Price is required')
+      .min(1, 'Must be at least 1'),
     labels: Yup.array().of(Yup.string()),
     inStock: Yup.boolean()
   })
@@ -42,43 +44,50 @@ export function ToyEdit() {
     loadToyLabels()
   }, [])
 
-  function loadToy() {
+  async function loadToy() {
     if (!toyId) return
-    toyService
-      .getById(toyId)
-      .then(setInitialValues)
-      .catch((err) => {
-        console.error('Error loading toy:', err)
-        showErrorMsg('Toy not found')
-        navigate('/toy')
-      })
+
+    try {
+      const toy = await toyService.getById(toyId)
+      setInitialValues(toy)
+    } catch (err) {
+      console.error('Error loading toy:', err)
+      showErrorMsg('Toy not found')
+      navigate('/toy')
+    }
   }
 
-  function loadToyLabels() {
-    toyService
-      .getToyLabels()
-      .then(setLabels)
-      .catch((err) => {
-        console.error('Error loading labels:', err)
-        showErrorMsg('Labels not found')
-        navigate('/toy')
-      })
+  async function loadToyLabels() {
+    try {
+      const labels = await toyService.getToyLabels()
+      setLabels(labels)
+    } catch (err) {
+      console.error('Error loading labels:', err)
+      showErrorMsg('Labels not found')
+      navigate('/toy')
+    }
   }
 
-  function onSubmit(values) {
-    saveToy(values)
-      .then((savedToy) => {
-        showSuccessMsg(`Toy ${savedToy._id} saved successfully`)
-        navigate('/toy')
-      })
-      .catch(() => {
-        showErrorMsg('Cannot save toy')
-      })
+  async function onSubmit(values) {
+    try {
+      const savedToy = await saveToy(values)
+      showSuccessMsg(`Toy ${savedToy._id} saved successfully`)
+      navigate('/toy')
+    } catch (err) {
+      showErrorMsg('Cannot save toy')
+    }
   }
 
   function oninput(props) {
     const label = utilService.firstLetterUpperCase(props.name)
-    return <TextField {...props} id="standard-basic" label={label} variant="standard" />
+    return (
+      <TextField
+        {...props}
+        id="standard-basic"
+        label={label}
+        variant="standard"
+      />
+    )
   }
 
   function MultipleSelectCheckmarks(props) {
@@ -125,7 +134,11 @@ export function ToyEdit() {
             {...props}
           >
             {labels.map((name) => (
-              <MenuItem key={name} value={name} style={getStyles(name, personName, theme)}>
+              <MenuItem
+                key={name}
+                value={name}
+                style={getStyles(name, personName, theme)}
+              >
                 {name}
               </MenuItem>
             ))}
@@ -137,14 +150,21 @@ export function ToyEdit() {
 
   function getStyles(name, personName, theme) {
     return {
-      fontWeight: personName.includes(name) ? theme.typography.fontWeightMedium : theme.typography.fontWeightRegular
+      fontWeight: personName.includes(name)
+        ? theme.typography.fontWeightMedium
+        : theme.typography.fontWeightRegular
     }
   }
 
   return (
     <section className="toy-edit">
       <h2>{toyId ? 'Edit' : 'Add'} Toy</h2>
-      <Formik initialValues={initialValues} enableReinitialize validationSchema={ToySchema} onSubmit={onSubmit}>
+      <Formik
+        initialValues={initialValues}
+        enableReinitialize
+        validationSchema={ToySchema}
+        onSubmit={onSubmit}
+      >
         {({ values, handleChange }) => (
           <Form>
             <div className="form-group">
@@ -159,7 +179,12 @@ export function ToyEdit() {
 
             <div className="form-group">
               <label htmlFor="labels">Labels:</label>
-              <Field as={MultipleSelectCheckmarks} id="labels" name="labels" multiple>
+              <Field
+                as={MultipleSelectCheckmarks}
+                id="labels"
+                name="labels"
+                multiple
+              >
                 {labels.map((label) => (
                   <option key={label} value={label}>
                     {label}

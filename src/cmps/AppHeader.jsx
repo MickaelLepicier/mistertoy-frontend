@@ -19,15 +19,20 @@ export function AppHeader() {
     fr: { nativeName: 'FR' }
   }
 
+  
   useEffect(() => {
-    toyService
-      .getToyLabels()
-      .then(setToyLabels)
-      .catch((err) => {
-        console.log('err:', err)
-        showErrorMsg('Cannot load toys labels')
-      })
+    loadToyLabels()
   }, [])
+
+  async function loadToyLabels(){
+    try {
+      const labels = await toyService.getToyLabels()
+      setToyLabels(labels)
+    } catch (err) {
+      console.log('err:', err)
+        showErrorMsg('Cannot load toys labels')
+    }
+  }
 
   function onSetFilter(filterBy) {
     setFilter(filterBy)

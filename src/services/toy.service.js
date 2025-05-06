@@ -29,47 +29,47 @@ export const toyService = {
   getToyLabelCounts
 }
 
-function query(filterBy = {}, sortBy = {}, pageIdx = 0) {
-  return storageService.query(TOY_DB).then((toys) => {
-    let toysToShow = [...toys]
+async function query(filterBy = {}, sortBy = {}, pageIdx = 0) {
+  const toys = await storageService.query(TOY_DB)
 
-    if (filterBy.txt) {
-      const regExp = new RegExp(filterBy.txt, 'i')
-      toysToShow = toysToShow.filter((toy) => regExp.test(toy.name))
-    }
+  let toysToShow = [...toys]
 
-    // Filter by inStock
-    if (typeof filterBy.inStock === 'boolean') {
-      toysToShow = toysToShow.filter(
-        (toy) => toy.inStock === JSON.parse(filterBy.inStock)
-      )
-    }
+  if (filterBy.txt) {
+    const regExp = new RegExp(filterBy.txt, 'i')
+    toysToShow = toysToShow.filter((toy) => regExp.test(toy.name))
+  }
 
-    // Filter by labels
-    if (filterBy.labels?.length) {
-      toysToShow = toysToShow.filter((toy) =>
-        filterBy.labels.every((label) => toy.labels.includes(label))
-      )
-    }
+  // Filter by inStock
+  if (typeof filterBy.inStock === 'boolean') {
+    toysToShow = toysToShow.filter(
+      (toy) => toy.inStock === JSON.parse(filterBy.inStock)
+    )
+  }
 
-    // Sort
-    if (sortBy.type) {
-      const dir = +sortBy.desc
-      toysToShow.sort((a, b) => {
-        if (sortBy.type === 'name') {
-          return a.name.localeCompare(b.name) * dir
-        } else if (sortBy.type === 'price' || sortBy.type === 'createdAt') {
-          return (a[sortBy.type] - b[sortBy.type]) * dir
-        }
-      })
-    }
+  // Filter by labels
+  if (filterBy.labels?.length) {
+    toysToShow = toysToShow.filter((toy) =>
+      filterBy.labels.every((label) => toy.labels.includes(label))
+    )
+  }
 
-    // Pagination
-    const startIdx = pageIdx * PAGE_SIZE
-    toysToShow = toysToShow.slice(startIdx, startIdx + PAGE_SIZE)
+  // Sort
+  if (sortBy.type) {
+    const dir = +sortBy.desc
+    toysToShow.sort((a, b) => {
+      if (sortBy.type === 'name') {
+        return a.name.localeCompare(b.name) * dir
+      } else if (sortBy.type === 'price' || sortBy.type === 'createdAt') {
+        return (a[sortBy.type] - b[sortBy.type]) * dir
+      }
+    })
+  }
 
-    return toysToShow
-  })
+  // Pagination
+  const startIdx = pageIdx * PAGE_SIZE
+  toysToShow = toysToShow.slice(startIdx, startIdx + PAGE_SIZE)
+
+  return toysToShow
 }
 
 function getById(toyId) {
@@ -116,18 +116,18 @@ function getToyLabels() {
   return Promise.resolve(labels)
 }
 
-function getToyLabelCounts() {
-  return storageService.query(TOY_DB).then((toys) => {
-    const labelCounts = {}
-    toys.forEach((toy) => {
-      toy.labels.forEach((label) => {
-        if (!labelCounts[label]) labelCounts[label] = { total: 0, inStock: 0 }
-        labelCounts[label].total++
-        if (toy.inStock) labelCounts[label].inStock++
-      })
+async function getToyLabelCounts() {
+  const toys = storageService.query(TOY_DB)
+
+  const labelCounts = {}
+  toys.forEach((toy) => {
+    toy.labels.forEach((label) => {
+      if (!labelCounts[label]) labelCounts[label] = { total: 0, inStock: 0 }
+      labelCounts[label].total++
+      if (toy.inStock) labelCounts[label].inStock++
     })
-    return labelCounts
   })
+  return labelCounts
 }
 
 function _getRandomLabels() {

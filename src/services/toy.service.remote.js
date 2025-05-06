@@ -65,20 +65,22 @@ function getToyLabelCounts() {
   return httpService.get(BASE_URL + 'labels/count')
 }
 
-function getPricePerLabelStats() {
-  return query().then((toys) => {
-    const stats = _getStatsPerLabel(
-      toys,
-      (toy) => ({ sum: toy.price, count: 1 }),
-      (sum, count) => Number((sum / count).toFixed(1))
-    )
-    // console.log('avgPricesPerLabel: ', stats)
-    return stats
-  })
+async function getPricePerLabelStats() {
+const toys = await query()
+
+const stats = _getStatsPerLabel(
+  toys,
+  (toy) => ({ sum: toy.price, count: 1 }),
+  (sum, count) => Number((sum / count).toFixed(1))
+)
+// console.log('avgPricesPerLabel: ', stats)
+return stats
 }
 
-function getInStockPerLabelStats() {
-  return query().then((toys) => {
+async function getInStockPerLabelStats() {
+
+    const toys = await query()
+
     const stats = _getStatsPerLabel(
       toys,
       (toy) => ({ sum: toy.inStock ? 1 : 0, count: 1 }),
@@ -86,7 +88,7 @@ function getInStockPerLabelStats() {
     )
     // console.log('inStockPerLabel: ', stats)
     return stats
-  })
+
 }
 
 function _getStatsPerLabel(toys, valueExtractor, resultFormatter) {

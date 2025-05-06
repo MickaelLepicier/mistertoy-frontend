@@ -8,9 +8,10 @@ import { PopUp } from '../cmps/PopUp'
 import { PaginationButtons } from '../cmps/PaginationButtons'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 
 export function ToyIndex() {
-  const {t} = useTranslation()
+  const { t } = useTranslation()
 
   const toys = useSelector((storeState) => storeState.toyModule.toys)
   const filterBy = useSelector((storeState) => storeState.toyModule.filterBy)
@@ -19,7 +20,6 @@ export function ToyIndex() {
   const pageIdx = useSelector((storeState) => storeState.toyModule.pageIdx)
 
   const [toyLabels, setToyLabels] = useState()
- 
 
   useEffect(() => {
     loadToys(pageIdx).catch((err) => {
@@ -28,13 +28,14 @@ export function ToyIndex() {
     })
   }, [filterBy, sortBy, pageIdx])
 
-  function onRemoveToy(toyId) {
-    removeToy(toyId)
-      .then(() => showSuccessMsg('Toy removed'))
-      .catch((err) => {
-        console.log('Cannot remove toy', err)
-        showErrorMsg('Cannot remove toy')
-      })
+  async function onRemoveToy(toyId) {
+    try {
+     await removeToy(toyId)
+      showSuccessMsg('Toy removed')
+    } catch (err) {
+      console.log('Cannot remove toy', err)
+      showErrorMsg('Cannot remove toy')
+    }
   }
 
   //   console.log('toys: ',toys)
@@ -46,7 +47,7 @@ export function ToyIndex() {
         </button>
       </div>
 
-      {isLoading && <Loader text={t('loading')}/>}
+      {isLoading && <Loader text={t('loading')} />}
       {!isLoading && <ToyList toys={toys} onRemoveToy={onRemoveToy} />}
 
       {<PaginationButtons pageIdx={pageIdx} />}
