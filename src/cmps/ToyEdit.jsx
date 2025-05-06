@@ -198,7 +198,7 @@ export function ToyEdit() {
               <div className="form-group">
                 <label>
                   <Field type="checkbox" name="inStock" />
-                  {t('in Stock')}
+                  {t('in_stock')}
                 </label>
               </div>
             )}

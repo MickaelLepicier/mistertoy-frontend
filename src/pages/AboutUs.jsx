@@ -6,7 +6,7 @@ export function AboutUs() {
 
   return (
     <section className="about-page">
-      <h1>{t('About Us')}</h1>
+      <h1>{t('about_us')}</h1>
       <h1>{t('welcome_to')} Mister-Toy</h1>
       <p>{t('msg_p_1')}</p>
       <p>{t('msg_p_2')}</p>

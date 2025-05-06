@@ -2,9 +2,6 @@ import i18n from 'i18next'
 import LanguageDetector from 'i18next-browser-languagedetector'
 import { initReactI18next } from 'react-i18next'
 
-// TODO:
-// The bug - when refresh the web is en
-// Put something in localStorage and like that the lng will be fr after refresh
 
 i18n
   .use(LanguageDetector)
@@ -26,7 +23,8 @@ i18n
           in_stock: 'In Stock',
           not_in_stock: 'Not In Stock',
           search: 'Search',
-          msg_top_header: 'Fast and free delivery to collection points throughout the country for purchases over 99$',
+          msg_top_header:
+            'Fast and free delivery to collection points throughout the country for purchases over 99$',
 
           // AppFooter
           msg_footer: 'All rights reserved',
@@ -78,7 +76,8 @@ i18n
 
           msg_p_2: 'Our motto is Quality + Service + Price:',
           msg_p_3: 'Top-quality products from leading brands around the world',
-          msg_p_4: 'Professional service, with recommendations on toys, unique gift wrapping, and fast deliveries',
+          msg_p_4:
+            'Professional service, with recommendations on toys, unique gift wrapping, and fast deliveries',
           msg_p_5: 'Fair prices compared to stores across the country',
           msg_p_6:
             'At our store, you can find: wooden toys, games, thinking games, didactic toys, Waldorf toys, puzzles, party games, science games, robotics, arts and crafts, and more.',
@@ -162,7 +161,8 @@ i18n
           msg_p_1:
             "Notre magasin a été fondé le 7 avril 2011 et offre depuis le plus haut niveau de service, des produits de la plus haute qualité dans l'industrie du jouet, et des prix équitables.",
           msg_p_2: 'Notre devise est Qualité + Service + Prix :',
-          msg_p_3: 'Produits de haute qualité de marques leaders du monde entier',
+          msg_p_3:
+            'Produits de haute qualité de marques leaders du monde entier',
           msg_p_4:
             'Service professionnel, avec des recommandations de jouets, des emballages cadeaux uniques et des livraisons rapides',
           msg_p_5: 'Prix équitables comparés aux magasins du pays',
@@ -188,7 +188,6 @@ i18n
         }
       }
     },
-    lng: 'en', // Default language
     interpolation: {
       escapeValue: false
     }
