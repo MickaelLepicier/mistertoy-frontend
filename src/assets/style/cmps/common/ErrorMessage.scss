@@ -1,5 +1,7 @@
 
 $error-fill-color: var(--clr-blue-reg); // You can replace this with a SCSS variable if defined
+// TODO find where (--clr-blue-reg exist and change to: 
+// $clr-blue-reg
 
 .error-message-container {
   position: fixed;

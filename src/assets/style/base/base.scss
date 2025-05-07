@@ -1,9 +1,10 @@
+
 * {
   box-sizing: border-box;
 }
 
 html {
-  color: var(--gray3);
+  color: $gray3;
   font-family: roboto, sans-serif;
 }
 
@@ -53,9 +54,9 @@ a.active {
   width: 40vw;
   align-items: center;
   height: auto;
-  background-color: rgb(248, 250, 247);
-  border: 1px solid #bebebe;
-  box-shadow: 1px 2px 16px #000000a6;
+  background-color: $clr3bg-light;
+  border: 1px solid $gray2;
+  box-shadow: 1px 2px 16px $clr1bs;
   display: flex;
   inset: 0;
   margin: auto;

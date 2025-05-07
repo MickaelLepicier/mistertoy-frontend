@@ -1,5 +1,5 @@
 
-$loader-color: var(--clr2); // Or define a SCSS variable like $clr2 if you're managing your palette via SCSS
+$loader-color: $clr2; // Or define a SCSS variable like $clr2 if you're managing your palette via SCSS
 
 .loader-container {
   display: flex;

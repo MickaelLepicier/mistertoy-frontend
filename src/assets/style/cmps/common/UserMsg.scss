@@ -12,8 +12,8 @@
 
   &.success,
   &.error {
-    background-color: var(--gray2);
-    color: var(--gray3);
+    background-color: $gray2;
+    color: $gray3;
   }
 
   button {

@@ -3,7 +3,7 @@
 .app-header {
   align-items: center;
   min-width: 100vw;
-  background-color: var(--clr3bg);
+  background-color: $clr3bg;
 
   header {
     display: flex;
@@ -27,7 +27,7 @@
       color: inherit;
 
       &.active {
-        color: var(--clr3bg);
+        color: $clr3bg;
       }
 
       &:not(:first-of-type) {
