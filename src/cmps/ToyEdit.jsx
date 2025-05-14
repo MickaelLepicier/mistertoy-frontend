@@ -5,7 +5,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { toyService } from '../services/toy.service.remote'
-import { saveToy } from '../store/toy/toyActions'
+import { saveToy } from '../store/toy/toy.actions'
 import { utilService } from '../services/util.service'
 import { useTranslation } from 'react-i18next'
 

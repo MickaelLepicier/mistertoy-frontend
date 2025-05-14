@@ -1,8 +1,8 @@
 import { useTranslation } from 'react-i18next'
-import { setPageIdx } from '../store/toy/toyActions'
+import { setPageIdx } from '../store/toy/toy.actions'
 
 export function PaginationButtons({ pageIdx }) {
-const {t} = useTranslation()
+  const { t } = useTranslation()
 
   return (
     <div className="pagination">

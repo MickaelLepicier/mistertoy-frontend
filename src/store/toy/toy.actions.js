@@ -10,35 +10,32 @@ import {
   UPDATE_TOY,
   ADD_TOY,
   SET_PAGE_IDX
-} from './toyReducer'
+} from './toy.reducer'
 
 export async function loadToys(pageIdx) {
   const { filterBy, sortBy } = store.getState().toyModule
   store.dispatch({ type: SET_IS_LOADING, isLoading: true })
 
-
   try {
-    const toys = await toyService.query(filterBy, sortBy,pageIdx)
+    const toys = await toyService.query(filterBy, sortBy, pageIdx)
     store.dispatch({ type: SET_TOYS, toys })
   } catch (err) {
     console.log('toy action -> Cannot load toys')
-      throw err
+    throw err
   } finally {
     setTimeout(() => {
       store.dispatch({ type: SET_IS_LOADING, isLoading: false })
     }, 350)
   }
-
 }
 
 export async function removeToy(toyId) {
-
   try {
     await toyService.remove(toyId)
     store.dispatch({ type: REMOVE_TOY, toyId })
   } catch (err) {
     console.log('toy action -> Cannot remove toy ', err)
-      throw err
+    throw err
   }
 }
 
@@ -62,10 +59,10 @@ export async function saveToy(toy) {
   try {
     const toyToSave = await toyService.save(toy)
     store.dispatch({ type, toy: toyToSave })
-   return toyToSave
+    return toyToSave
   } catch (err) {
     console.log('toy action -> Cannot save toy ', err)
-      throw err
+    throw err
   }
 }
 
@@ -78,6 +75,6 @@ export function setSort(sortBy = toyService.getDefaultSort()) {
 }
 
 export function setPageIdx(pageIdx = 0) {
-  if(pageIdx >= 3) pageIdx = 0
+  if (pageIdx >= 3) pageIdx = 0
   store.dispatch({ type: SET_PAGE_IDX, pageIdx })
 }

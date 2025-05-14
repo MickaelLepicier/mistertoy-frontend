@@ -1,13 +1,15 @@
 import { useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
-import { setFilter, setPageIdx, setSort } from '../store/toy/toyActions'
+import { setFilter, setPageIdx, setSort } from '../store/toy/toy.actions'
 import { ToyFilter } from './ToyFilter'
 import { toyService } from '../services/toy.service.remote'
 import { useEffect, useState } from 'react'
 import { ToySort } from './ToySort'
 import { useTranslation } from 'react-i18next'
+import { LoginSignup } from './LoginSignup'
 
 export function AppHeader() {
+  const user = useSelector((storeState) => storeState.userModule.loggedInUser)
   const filterBy = useSelector((storeState) => storeState.toyModule.filterBy)
   const sortBy = useSelector((storeState) => storeState.toyModule.sortBy)
 
@@ -19,18 +21,17 @@ export function AppHeader() {
     fr: { nativeName: 'FR' }
   }
 
-  
   useEffect(() => {
     loadToyLabels()
   }, [])
 
-  async function loadToyLabels(){
+  async function loadToyLabels() {
     try {
       const labels = await toyService.getToyLabels()
       setToyLabels(labels)
     } catch (err) {
       console.log('err:', err)
-        showErrorMsg('Cannot load toys labels')
+      showErrorMsg('Cannot load toys labels')
     }
   }
 
@@ -49,6 +50,17 @@ export function AppHeader() {
       {/* CartButton */}
 
       <main>
+        {user ? (
+          <section>
+            <span to={`/user/${user._id}`}>Hello {user.fullname}</span>
+            <button className="btn btn-logout" onClick={onLogout}>
+              Logout
+            </button>
+          </section>
+        ) : (
+          <LoginSignup />
+        )}
+
         <div>
           {Object.keys(lngs).map((lng) => (
             <button

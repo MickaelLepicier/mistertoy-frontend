@@ -3,8 +3,10 @@ import { ToyPreview } from './ToyPreview'
 import { useTranslation } from 'react-i18next'
 
 export function ToyList({ onRemoveToy, toys }) {
-    const {t} = useTranslation()
-  
+  const { t } = useTranslation()
+
+  // console.log('toys: ',toys)
+
   const elLis = toys.map((toy) => (
     <li key={toy._id}>
       <ToyPreview toy={toy} />
