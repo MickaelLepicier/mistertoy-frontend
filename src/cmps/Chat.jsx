@@ -1,68 +1,48 @@
-import { useState, useEffect, useRef } from 'react'
-import { useTranslation } from 'react-i18next'
+import { useState } from 'react'
 
-export function Chat() {
-    const {t} = useTranslation()
+export function Chat({ msgs, user, onSend }) {
+    const [input, setInput] = useState({ txt: '' })
 
-    const [msgs, setMsgs] = useState([])
-    const [userInput, setUserInput] = useState('')
-    const msgsRef = useRef()
-
-    useEffect(() => {
-        if (msgsRef.current) {
-            msgsRef.current.scrollTo({
-                top: msgsRef.current.scrollHeight,
-                behavior: "smooth",
-            });
-        }
-    }, [msgs])
-
-    function addMsg(text, from) {
-        const newMsg = {
-            id: Date.now(),
-            text,
-            from,
-            timestamp: new Date().toLocaleTimeString()
-        }
-        setMsgs(prevMsgs => [...prevMsgs, newMsg])
+    function handleMsgChange(ev) {
+        const { name: field, value } = ev.target
+        setInput(msg => ({ ...msg, [field]: value }))
     }
 
-    const handleSubmit = (ev) => {
-        ev.preventDefault()
-        if (!userInput.trim()) return
-
-        addMsg(userInput, 'user')
-  
-        setTimeout(() => {
-            addMsg(`Sure thing honey`, 'Support')
-        }, 1000)
-        
-        setUserInput('')
+    function sendMsg() {
+        const trimmed = input.txt.trim()
+        if (!trimmed) return
+        onSend(input)
+        setInput({ txt: '' })
     }
 
     return (
         <div className="chat-container">
-            <div ref={msgsRef} className="chat-messages">
-                {msgs.map(msg => (
-                    <div key={msg.id} className={`message ${msg.from === 'user' ? t('user') : t('other')}`}>
-                        <section>
-                            <span className="timestamp">{msg.timestamp}</span>
-                            <h3>{msg.from === 'user' ? t('you') : msg.from}: </h3>
-                        </section>
-                        <p>{msg.text}</p>
-                    </div>
-                ))}
-            </div>
+            <div className="chat-msgs">
+                {msgs.map(msg => {
+                    const isUser = msg.by._id === user._id
+                    const position = isUser ? 'user' : 'other'
 
-            <form onSubmit={handleSubmit} className="chat-input-form">
+                    return (
+                        <div key={msg.id} className={`chat-msg ${position}`}>
+                            <strong>{msg.by.fullname === user.fullname ? 'Me' : msg.by.fullname }: </strong>
+                            {msg.txt}
+                        </div>
+                    )
+                })}
+            </div>
+            <div className="chat-input">
                 <input
                     type="text"
-                    value={userInput}
-                    onChange={(ev) => setUserInput(ev.target.value)}
-                    placeholder="Type your message..."
+                    value={input.txt}
+                    name='txt'
+                    onChange={handleMsgChange}
+                    placeholder="Type a message..."
+                    onKeyDown={ev => ev.key === 'Enter' && sendMsg()}
                 />
-                <button type="submit">{t('send')}</button>
-            </form>
+                <button className="btn" onClick={sendMsg}>
+                    Send
+                </button>
+            </div>
         </div>
     )
 }

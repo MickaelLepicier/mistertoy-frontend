@@ -1,7 +1,16 @@
 import { httpService } from './http.service'
 
 const BASE_URL = 'toy/'
-export const labels = ['On wheels', 'Box game', 'Art', 'Baby', 'Doll', 'Puzzle', 'Outdoor', 'Battery Powered']
+export const labels = [
+  'On wheels',
+  'Box game',
+  'Art',
+  'Baby',
+  'Doll',
+  'Puzzle',
+  'Outdoor',
+  'Battery Powered'
+]
 
 export const toyService = {
   query,
@@ -14,7 +23,9 @@ export const toyService = {
   getToyLabels,
   getToyLabelCounts,
   getPricePerLabelStats,
-  getInStockPerLabelStats
+  getInStockPerLabelStats,
+  addMsg,
+  removeMsg
 }
 
 function query(filterBy = {}, sortBy, pageIdx) {
@@ -66,29 +77,35 @@ function getToyLabelCounts() {
 }
 
 async function getPricePerLabelStats() {
-const toys = await query()
+  const toys = await query()
 
-const stats = _getStatsPerLabel(
-  toys,
-  (toy) => ({ sum: toy.price, count: 1 }),
-  (sum, count) => Number((sum / count).toFixed(1))
-)
-// console.log('avgPricesPerLabel: ', stats)
-return stats
+  const stats = _getStatsPerLabel(
+    toys,
+    (toy) => ({ sum: toy.price, count: 1 }),
+    (sum, count) => Number((sum / count).toFixed(1))
+  )
+  // console.log('avgPricesPerLabel: ', stats)
+  return stats
 }
 
 async function getInStockPerLabelStats() {
+  const toys = await query()
 
-    const toys = await query()
+  const stats = _getStatsPerLabel(
+    toys,
+    (toy) => ({ sum: toy.inStock ? 1 : 0, count: 1 }),
+    (sum, count) => Number(((sum / count) * 100).toFixed(1))
+  )
+  // console.log('inStockPerLabel: ', stats)
+  return stats
+}
 
-    const stats = _getStatsPerLabel(
-      toys,
-      (toy) => ({ sum: toy.inStock ? 1 : 0, count: 1 }),
-      (sum, count) => Number(((sum / count) * 100).toFixed(1))
-    )
-    // console.log('inStockPerLabel: ', stats)
-    return stats
+async function addMsg(toyId, msg) {
+  return httpService.post(BASE_URL + `${toyId}/msg`, msg)
+}
 
+async function removeMsg(toyId, msgId) {
+  return httpService.delete(BASE_URL + `${toyId}/msg/${msgId}`)
 }
 
 function _getStatsPerLabel(toys, valueExtractor, resultFormatter) {
@@ -121,9 +138,3 @@ function _getRandomLabels() {
   }
   return randomLabels
 }
-
-
-
-
-
-

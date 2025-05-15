@@ -2,9 +2,12 @@ import { useState } from 'react'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
 import { login, signup } from '../store/user/user.actions.js'
 import { LoginForm } from './LoginForm.jsx'
+import { useTranslation } from 'react-i18next'
 
 export function LoginSignup() {
+    
     const [isSignup, setIsSignUp] = useState(false)
+    const { t, i18n } = useTranslation()
 
     function onLogin(credentials) {
         isSignup ? _signup(credentials) : _login(credentials)
@@ -35,7 +38,7 @@ export function LoginSignup() {
                 <a href="#" onClick={() => setIsSignUp(prev => !prev)}>
                     {isSignup
                         ? 'Already a member? Login'
-                        : 'New user? Signup here'}
+                        : t('new_user')}
                 </a>
             </div>
         </section>

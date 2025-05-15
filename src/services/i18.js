@@ -2,7 +2,6 @@ import i18n from 'i18next'
 import LanguageDetector from 'i18next-browser-languagedetector'
 import { initReactI18next } from 'react-i18next'
 
-
 i18n
   .use(LanguageDetector)
   .use(initReactI18next)
@@ -60,6 +59,7 @@ i18n
           back: 'Back',
           chat_about: 'Chat About',
           chat: 'Chat',
+          comments: 'Comments',
 
           // Chat
           user: 'user',
@@ -94,7 +94,15 @@ i18n
           msg_chart_h_2: 'Percentage of toys that are in-stock per labels',
 
           // GoogleMaps
-          location: 'Location of branches'
+          location: 'Location of branches',
+
+          // Login & Logout
+          login: 'Login',
+          logout: 'Logout',
+          username: 'Username',
+          password: 'Password',
+          new_user: 'New user? Signup here',
+          already_member: 'Already a member? Login'
         }
       },
       fr: {
@@ -147,6 +155,8 @@ i18n
           back: 'Retour',
           chat_about: 'Discuter à propos',
           chat: 'Discussion',
+          comments: 'commentaires',
+
 
           // Chat
           user: 'utilisateur',
@@ -184,7 +194,15 @@ i18n
           msg_chart_h_2: 'Pourcentage de jouets en stock par étiquette',
 
           // GoogleMaps
-          location: 'Emplacement des succursales'
+          location: 'Emplacement des succursales',
+
+          // Login & Logout
+          login: 'Connexion',
+          logout: 'Déconnexion',
+          username: `Nom d'utilisateur`,
+          password: 'Mot de passe',
+          new_user: 'Nouvel utilisateur ? Inscrivez-vous ici',
+          already_member: 'Déjà membre? Se connecter'
         }
       }
     },

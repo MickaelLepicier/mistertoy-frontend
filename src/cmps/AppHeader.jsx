@@ -7,6 +7,8 @@ import { useEffect, useState } from 'react'
 import { ToySort } from './ToySort'
 import { useTranslation } from 'react-i18next'
 import { LoginSignup } from './LoginSignup'
+import { logout } from '../store/user/user.actions'
+import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 
 export function AppHeader() {
   const user = useSelector((storeState) => storeState.userModule.loggedInUser)
@@ -44,37 +46,22 @@ export function AppHeader() {
     setSort(sortBy)
   }
 
+
+  async function onLogout() {
+    try {
+        await logout()
+        showSuccessMsg('Bye Bye')
+    } catch (error) {
+        showErrorMsg('OOPs try again')
+    }
+}
+
   return (
     <section className="app-header">
       <header>{t('msg_top_header')}</header>
       {/* CartButton */}
 
       <main>
-        {user ? (
-          <section>
-            <span to={`/user/${user._id}`}>Hello {user.fullname}</span>
-            <button className="btn btn-logout" onClick={onLogout}>
-              Logout
-            </button>
-          </section>
-        ) : (
-          <LoginSignup />
-        )}
-
-        <div>
-          {Object.keys(lngs).map((lng) => (
-            <button
-              className="btn-lng"
-              // type="submit"
-              key={lng}
-              onClick={() => i18n.changeLanguage(lng)}
-              disabled={i18n.resolvedLanguage === lng}
-            >
-              {lngs[lng].nativeName}
-            </button>
-          ))}
-        </div>
-
         <ToyFilter
           filterBy={filterBy}
           onSetFilter={onSetFilter}
@@ -92,6 +79,32 @@ export function AppHeader() {
           <NavLink to="/about">{t('about')} </NavLink>
         </nav>
       </main>
+
+      <footer>
+        {user ? (
+          <section>
+            <span to={`/user/${user._id}`}>Hello {user.fullname}</span>
+            <button className="btn btn-logout" onClick={onLogout}>
+              Logout
+            </button>
+          </section>
+        ) : (
+          <LoginSignup />
+        )}
+        <div>
+          {Object.keys(lngs).map((lng) => (
+            <button
+              className="btn-lng"
+              // type="submit"
+              key={lng}
+              onClick={() => i18n.changeLanguage(lng)}
+              disabled={i18n.resolvedLanguage === lng}
+            >
+              {lngs[lng].nativeName}
+            </button>
+          ))}
+        </div>
+      </footer>
 
       {/* <footer> special filter </footer> */}
     </section>

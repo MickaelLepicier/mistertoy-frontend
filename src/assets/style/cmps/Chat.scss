@@ -1,68 +1,55 @@
 .chat-container {
-    max-width: 600px;
-    margin: 20px auto;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 20px;
-  
-    .title {
-      display: flex;
-      justify-content: space-between;
-    }
-  }
-  
-  .chat-messages {
-    height: 400px;
-    overflow-y: auto;
-    margin-bottom: 20px;
-    padding: 10px;
-  }
-  
-  .message {
-    margin: 10px 0;
-    padding: 10px;
-    border-radius: 8px;
-  
-    &.user {
-      background-color: #e3f2fd;
-      margin-left: 20%;
-    }
-  
-    &.other {
-      background-color: #f5f5f5;
-      margin-right: 20%;
-    }
-  }
-  
-  .timestamp {
-    font-size: 0.8em;
-    color: #666;
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  .chat-input-form {
-    display: flex;
-    gap: 10px;
-  
-    input {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  max-height: 300px;
+  overflow: hidden;
+  border-top: 1px solid #ccc;
+
+  .chat-msgs {
       flex: 1;
-      padding: 8px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-  
-    button {
-      padding: 8px 16px;
-      background-color: #007bff;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-  
-      &:hover {
-        background-color: #0056b3;
+      overflow-y: auto;
+      max-height: 200px;
+      padding: 10px;
+
+      .chat-msg {
+          padding: 8px;
+          border-radius: 5px;
+          margin: 5px 0;
+          max-width: 75%;
+
+          &:nth-child(odd) {
+              background-color: #f5f5f5;
+          }
+
+          &:nth-child(even) {
+              // background-color: $clr-brand2;
+              background-color: gold;
+          }
       }
-    }
+
+      .chat-msg.user {
+          align-self: flex-end;
+          text-align: right;
+      }
+
+      .chat-msg.other {
+          align-self: flex-start;
+          text-align: left;
+      }
   }
-  
+
+  .chat-input {
+      display: flex;
+      gap: 5px;
+      padding: 10px;
+
+      input {
+          flex: 1;
+          padding: 8px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+      }
+  }
+}
