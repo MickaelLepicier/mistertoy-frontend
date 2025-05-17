@@ -15,35 +15,35 @@
 
 
 /* Setup */
-@import 'setup/vars.scss';
-@import 'setup/typography.scss';
-@import 'setup/animations.scss';
+@import 'setup/_vars.scss';
+@import 'setup/_typography.scss';
+@import 'setup/_animations.scss';
 
 
 
 /* Base */
-@import 'base/base.scss';
-@import 'base/helpers.scss';
-@import 'base/layout.scss';
-@import 'base/forms.scss';
+@import 'base/_base.scss';
+@import 'base/_helpers.scss';
+@import 'base/_layout.scss';
+@import 'base/_forms.scss';
 
 
 
 /* Components */
-@import 'cmps/common/ErrorMessage.scss';
-@import 'cmps/common/Loader.scss';
-@import 'cmps/common/UserMsg.scss';
-@import 'cmps/AppHeader.scss';
-@import 'cmps/AppFooter.scss';
-@import 'cmps/HomePage.scss';
-@import 'cmps/AboutUs.scss';
-@import 'cmps/ToyIndex.scss';
-@import 'cmps/ToyList.scss';
-@import 'cmps/ToyPreview.scss';
-@import 'cmps/ToyDetails.scss';
-@import 'cmps/PopUp.scss';
-@import 'cmps/Chat.scss';
-@import 'cmps/ToyEdit.scss';
-@import 'cmps/ToyDashboard.scss';
+@import 'cmps/common/_ErrorMessage.scss';
+@import 'cmps/common/_Loader.scss';
+@import 'cmps/common/_UserMsg.scss';
+@import 'cmps/_AppHeader.scss';
+@import 'cmps/_AppFooter.scss';
+@import 'cmps/_HomePage.scss';
+@import 'cmps/_AboutUs.scss';
+@import 'cmps/_ToyIndex.scss';
+@import 'cmps/_ToyList.scss';
+@import 'cmps/_ToyPreview.scss';
+@import 'cmps/_ToyDetails.scss';
+@import 'cmps/_PopUp.scss';
+@import 'cmps/_Chat.scss';
+@import 'cmps/_ToyEdit.scss';
+@import 'cmps/_ToyDashboard.scss';
 
 
