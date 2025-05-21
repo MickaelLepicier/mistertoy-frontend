@@ -118,7 +118,10 @@ i18n
           by: 'By',
 
           // User
-          profile: 'Profile'
+          profile: 'Profile',
+
+          // UserDetails
+          any_reviews: `You haven't posted any reviews yet`
         }
       },
       fr: {
@@ -233,7 +236,10 @@ i18n
           by: 'Par',
 
           // User
-          profile: 'Profil'
+          profile: 'Profil',
+         
+          // UserDetails
+          any_reviews: `Vous n'avez pas encore publié d'avis`
         }
       }
     },

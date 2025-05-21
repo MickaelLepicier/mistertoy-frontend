@@ -46,15 +46,14 @@ export function AppHeader() {
     setSort(sortBy)
   }
 
-
   async function onLogout() {
     try {
-        await logout()
-        showSuccessMsg('Bye Bye')
+      await logout()
+      showSuccessMsg('Bye Bye')
     } catch (error) {
-        showErrorMsg('OOPs try again')
+      showErrorMsg('OOPs try again')
     }
-}
+  }
 
   return (
     <section className="app-header">
@@ -77,6 +76,7 @@ export function AppHeader() {
           <NavLink to="/toy">{t('toys')} </NavLink>
           <NavLink to="/dashboard">{t('dashboard')} </NavLink>
           <NavLink to="/review">{t('reviews')}</NavLink>|
+          <NavLink to="/user">{t('profile')}</NavLink>|
           <NavLink to="/about">{t('about')} </NavLink>
         </nav>
       </main>
@@ -84,7 +84,9 @@ export function AppHeader() {
       <footer>
         {user ? (
           <section>
-            <span to={`/user/${user._id}`}>{t('hello')} {user.fullname}</span>
+            <span to={`/user/${user._id}`}>
+              {t('hello')} {user.fullname}
+            </span>
             <button className="btn btn-logout" onClick={onLogout}>
               {t('logout')}
             </button>

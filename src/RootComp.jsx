@@ -39,6 +39,7 @@ function App() {
               <Route element={<ToyEdit />} path="/toy/edit/:toyId?" />
               <Route element={<ToyDashboard />} path="/dashboard" />
               <Route element={<ReviewIndex />} path="/review" />
+              <Route element={<UserDetails />} path="/user" />
             </Routes>
           </main>
           <DynamicModal />
