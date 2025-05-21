@@ -115,8 +115,8 @@ i18n
           add: 'Add',
 
           // ReviewPreview
-          by:'By',
-          
+          by: 'By',
+
           // User
           profile: 'Profile'
         }
@@ -218,7 +218,22 @@ i18n
           username: `Nom d'utilisateur`,
           password: 'Mot de passe',
           new_user: 'Nouvel utilisateur ? Inscrivez-vous ici',
-          already_member: 'Déjà membre? Se connecter'
+          already_member: 'Déjà membre? Se connecter',
+
+          // Reviews
+          reviews: 'Avis',
+          reviews_gossip: 'Avis et ragots',
+          login_first: 'Veuillez vous connecter d’abord',
+
+          // ReviewEdit
+          review_about: 'Avis sur...',
+          add: 'Ajouter',
+
+          // ReviewPreview
+          by: 'Par',
+
+          // User
+          profile: 'Profil'
         }
       }
     },
