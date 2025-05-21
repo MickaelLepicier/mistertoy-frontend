@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next'
 import { GoogleMaps } from '../cmps/GoogleMap'
 
-export function AboutUs() {
+export function About() {
   const { t } = useTranslation()
 
   return (
