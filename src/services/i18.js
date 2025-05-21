@@ -11,11 +11,12 @@ i18n
     resources: {
       en: {
         translation: {
-          // ToyHeader
+          // AppHeader
           home: 'Home',
           toys: 'Toys',
           dashboard: 'Dashboard',
           about: 'About',
+          hello: 'Hello',
           mister_toy: 'MISTER TOY',
           i18: 'internationalization',
           all: 'All',
@@ -102,7 +103,22 @@ i18n
           username: 'Username',
           password: 'Password',
           new_user: 'New user? Signup here',
-          already_member: 'Already a member? Login'
+          already_member: 'Already a member? Login',
+
+          // Reviews
+          reviews: 'Reviews',
+          reviews_gossip: 'Reviews and Gossip',
+          login_first: 'Please login first',
+
+          // ReviewEdit
+          review_about: 'Review about...',
+          add: 'Add',
+
+          // ReviewPreview
+          by:'By',
+          
+          // User
+          profile: 'Profile'
         }
       },
       fr: {
@@ -112,6 +128,7 @@ i18n
           toys: 'Jouets',
           dashboard: 'Graphiques',
           about: 'À propos',
+          hello: 'Bonjour',
           mister_toy: 'Monsieur Jouet',
           i18: 'internationalisation',
           all: 'Tous',
@@ -156,7 +173,6 @@ i18n
           chat_about: 'Discuter à propos',
           chat: 'Discussion',
           comments: 'commentaires',
-
 
           // Chat
           user: 'utilisateur',
