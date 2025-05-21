@@ -13,6 +13,7 @@ import { ToyDetails } from './pages/ToyDetails'
 import { ToyEdit } from './cmps/ToyEdit'
 import { ToyDashboard } from './pages/ToyDashboard'
 import { DynamicModal } from './cmps/DynamicModal'
+import { ReviewIndex } from './pages/ReviewIndex'
 
 function App() {
   const style = {
@@ -37,7 +38,7 @@ function App() {
               <Route element={<ToyDetails />} path="/toy/:toyId" />
               <Route element={<ToyEdit />} path="/toy/edit/:toyId?" />
               <Route element={<ToyDashboard />} path="/dashboard" />
-
+              <Route element={<ReviewIndex />} path="/review" />
             </Routes>
           </main>
           <DynamicModal />

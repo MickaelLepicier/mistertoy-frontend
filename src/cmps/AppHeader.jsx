@@ -76,6 +76,7 @@ export function AppHeader() {
           <NavLink to="/">{t('home')}</NavLink>
           <NavLink to="/toy">{t('toys')} </NavLink>
           <NavLink to="/dashboard">{t('dashboard')} </NavLink>
+          <NavLink to="/review">{t('reviews')}</NavLink>|
           <NavLink to="/about">{t('about')} </NavLink>
         </nav>
       </main>
@@ -83,9 +84,9 @@ export function AppHeader() {
       <footer>
         {user ? (
           <section>
-            <span to={`/user/${user._id}`}>Hello {user.fullname}</span>
+            <span to={`/user/${user._id}`}>{t('hello')} {user.fullname}</span>
             <button className="btn btn-logout" onClick={onLogout}>
-              Logout
+              {t('logout')}
             </button>
           </section>
         ) : (
