@@ -28,7 +28,7 @@ export const toyService = {
   removeMsg
 }
 
-function query(filterBy = {}, sortBy, pageIdx) {
+function query(filterBy = {}, sortBy = {}, pageIdx = 0) {
   return httpService.get(BASE_URL, { filterBy, sortBy, pageIdx })
   // return axios.get(BASE_URL, {params: { filterBy, sortBy, pageIdx }})
 }

@@ -14,6 +14,7 @@ import { ToyEdit } from './cmps/ToyEdit'
 import { ToyDashboard } from './pages/ToyDashboard'
 import { DynamicModal } from './cmps/DynamicModal'
 import { ReviewIndex } from './pages/ReviewIndex'
+import { UserDetails } from './pages/UserDetails'
 
 function App() {
   const style = {

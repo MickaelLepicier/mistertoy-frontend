@@ -1,16 +1,18 @@
 import { useState } from 'react'
 
-import { addReview } from '../store/actions/review.actions'
+import { addReview } from '../store/review/review.actions'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { useTranslation } from 'react-i18next'
+import { Loader } from './Loader'
 
 export function ReviewEdit({ toys }) {
+
     const [reviewToEdit, setReviewToEdit] = useState({
         txt: '',
         aboutToyId: '',
     })
-
-    const { t, i18n } = useTranslation()
+console.log('reviewToEdit.aboutToyId: ',reviewToEdit.aboutToyId)
+    const { t } = useTranslation()
     
     function handleChange(ev) {
         const { name, value } = ev.target
@@ -31,7 +33,7 @@ export function ReviewEdit({ toys }) {
             showErrorMsg('Cannot add review')
         }
     }
-
+    if(!toys) return <Loader />
     return (
         <form className="review-edit" onSubmit={onAddReview}>
             <select

@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux"
-import { onToggleModal } from "../store/actions/app.actions"
+import { onToggleModal } from "../store/app/app.actions"
 
 
 export function DynamicModal() {
@@ -9,7 +9,7 @@ export function DynamicModal() {
 		onToggleModal()
 	}
 
-	console.log('modalData', modalData)
+	// console.log('modalData', modalData)
 	if (!modalData) return <></>
 	const Cmp = modalData.cmp
 	return (

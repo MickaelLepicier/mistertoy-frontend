@@ -75,8 +75,8 @@ export function AppHeader() {
           <NavLink to="/">{t('home')}</NavLink>
           <NavLink to="/toy">{t('toys')} </NavLink>
           <NavLink to="/dashboard">{t('dashboard')} </NavLink>
-          <NavLink to="/review">{t('reviews')}</NavLink>|
-          <NavLink to="/user">{t('profile')}</NavLink>|
+          <NavLink to="/review">{t('reviews')}</NavLink>
+          <NavLink to="/user">{t('profile')}</NavLink>
           <NavLink to="/about">{t('about')} </NavLink>
         </nav>
       </main>

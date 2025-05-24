@@ -1,4 +1,4 @@
-import { SET_MODAL_DATA } from "../reducers/app.reducer";
+import { SET_MODAL_DATA } from "../app/app.reducer";
 import { store } from "../store";
 
 

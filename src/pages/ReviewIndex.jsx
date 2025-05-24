@@ -6,7 +6,7 @@ import { loadReviews, removeReview } from '../store/review/review.actions'
 import { ReviewEdit } from '../cmps/ReviewEdit'
 import { ReviewList } from '../cmps/ReviewList'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
-import { toyService } from '../services/toy.service'
+import { toyService } from '../services/toy.service.remote'
 import { useTranslation } from 'react-i18next'
 
 export function ReviewIndex() {
@@ -23,7 +23,7 @@ export function ReviewIndex() {
 
   async function loadToys() {
     try {
-      const { toys } = await toyService.query({ fetchAll: true })
+      const toys  = await toyService.query()
       setToys(toys)
     } catch (error) {
       console.log('error:', error)
