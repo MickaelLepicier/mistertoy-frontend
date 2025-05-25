@@ -1,4 +1,4 @@
-import { toyService } from '../../services/toy.service.remote'
+import { toyService } from '../../services/toy'
 import { store } from '../store'
 import {
   SET_TOYS,

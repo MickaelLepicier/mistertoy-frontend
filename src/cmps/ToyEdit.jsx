@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
-import { toyService } from '../services/toy.service.remote'
+import { getEmptyToy, toyService } from '../services/toy'
 import { saveToy } from '../store/toy/toy.actions'
 import { utilService } from '../services/util.service'
 import { useTranslation } from 'react-i18next'
@@ -25,7 +25,7 @@ import {
 export function ToyEdit() {
   const { t } = useTranslation()
 
-  const [initialValues, setInitialValues] = useState(toyService.getEmptyToy())
+  const [initialValues, setInitialValues] = useState(getEmptyToy())
   const [labels, setLabels] = useState([])
   const { toyId } = useParams()
   const navigate = useNavigate()

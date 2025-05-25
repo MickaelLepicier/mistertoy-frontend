@@ -2,7 +2,8 @@ import { httpService } from './http.service'
 
 const BASE_URL = 'review/'
 
-export const reviewService = {
+// export const reviewService = {
+ const reviewService = {
     add,
     query,
     remove,

@@ -1,6 +1,7 @@
 import { httpService } from './http.service'
 
-export const userService = {
+// export const userService = {
+ const userService = {
     login,
     signup,
     logout,

@@ -1,24 +1,12 @@
-import { httpService } from './http.service'
+import { httpService } from '../http.service'
 
 const BASE_URL = 'toy/'
-export const labels = [
-  'On wheels',
-  'Box game',
-  'Art',
-  'Baby',
-  'Doll',
-  'Puzzle',
-  'Outdoor',
-  'Battery Powered'
-]
 
 export const toyService = {
   query,
   getById,
   save,
   remove,
-  getEmptyToy,
-  getDefaultFilter,
   getDefaultSort,
   getToyLabels,
   getToyLabelCounts,
@@ -46,26 +34,8 @@ function save(toy) {
   return httpService[method](BASE_URL, toy)
 }
 
-function getDefaultFilter() {
-  return {
-    txt: '',
-    inStock: null,
-    labels: []
-    // pageIdx: 0,
-  }
-}
-
 function getDefaultSort() {
   return { type: '', desc: 1 }
-}
-
-function getEmptyToy() {
-  return {
-    name: '',
-    price: '',
-    labels: _getRandomLabels(),
-    inStock: true
-  }
 }
 
 function getToyLabels() {
@@ -127,14 +97,4 @@ function _getStatsPerLabel(toys, valueExtractor, resultFormatter) {
   }
 
   return formattedStats
-}
-
-function _getRandomLabels() {
-  const labelsCopy = [...labels]
-  const randomLabels = []
-  for (let i = 0; i < 2; i++) {
-    const randomIdx = Math.floor(Math.random() * labelsCopy.length)
-    randomLabels.push(labelsCopy.splice(randomIdx, 1)[0])
-  }
-  return randomLabels
 }

@@ -1,4 +1,4 @@
-import { reviewService } from '../../services/review.service'
+import { reviewService } from '../../services/review'
 
 import {
     ADD_REVIEW,
@@ -38,3 +38,10 @@ export async function removeReview(reviewId) {
     }
 }
 
+// Command Creators
+export function getActionRemoveReview(reviewId) {
+    return { type: REMOVE_REVIEW, reviewId }
+}
+export function getActionAddReview(review) {
+    return { type: ADD_REVIEW, review }
+}

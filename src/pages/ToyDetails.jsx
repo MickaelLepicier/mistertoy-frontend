@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import { toyService } from '../services/toy.service.remote'
+import { toyService } from '../services/toy'
 import { Loader } from '../cmps/Loader'
 import { PopUp } from '../cmps/PopUp'
 import { Chat } from '../cmps/Chat'
@@ -51,7 +51,7 @@ export function ToyDetails() {
   if (!toy) return <Loader text={t('loading')} />
   const formattedDate = new Date(toy.createdAt).toLocaleString('he')
 
-  const msgs = toy.msgs.map(m=> m.txt).join(', ')
+  const msgs = toy.msgs.map((m) => m.txt).join(', ')
 
   return (
     <section className="toy-details" style={{ textAlign: 'center' }}>
@@ -88,7 +88,12 @@ export function ToyDetails() {
           onClose={() => setIsChatOpen(false)}
           isOpen={isChatOpen}
         >
-          <Chat msgs={toy.msgs || []} user={user} onSend={onSaveMsg} />
+          <Chat
+            msgs={toy.msgs || []}
+            user={user}
+            onSend={onSaveMsg}
+            toyId={toy._id}
+          />
         </PopUp>
       )}
 

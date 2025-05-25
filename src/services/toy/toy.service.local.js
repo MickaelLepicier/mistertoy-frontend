@@ -1,19 +1,9 @@
-import { storageService } from './async-storage.service'
-import { utilService } from './util.service'
+import { storageService } from '../async-storage.service'
+import { utilService } from '../util.service'
 
 const TOY_DB = 'toyDB'
 const PAGE_SIZE = 4
 
-const labels = [
-  'On wheels',
-  'Box game',
-  'Art',
-  'Baby',
-  'Doll',
-  'Puzzle',
-  'Outdoor',
-  'Battery Powered'
-]
 
 _createToys()
 
@@ -22,9 +12,7 @@ export const toyService = {
   getById,
   remove,
   save,
-  getDefaultFilter,
   getDefaultSort,
-  getEmptyToy,
   getToyLabels,
   getToyLabelCounts
 }
@@ -90,27 +78,11 @@ function save(toy) {
   }
 }
 
-function getDefaultFilter() {
-  return {
-    txt: '',
-    inStock: null,
-    labels: [],
-    pageIdx: 0
-  }
-}
-
 function getDefaultSort() {
   return { type: '', desc: 1 }
 }
 
-function getEmptyToy() {
-  return {
-    name: '',
-    price: '',
-    labels: _getRandomLabels(),
-    inStock: true
-  }
-}
+
 
 function getToyLabels() {
   return Promise.resolve(labels)
@@ -128,16 +100,6 @@ async function getToyLabelCounts() {
     })
   })
   return labelCounts
-}
-
-function _getRandomLabels() {
-  const labelsCopy = [...labels]
-  const randomLabels = []
-  for (let i = 0; i < 2; i++) {
-    const idx = Math.floor(Math.random() * labelsCopy.length)
-    randomLabels.push(labelsCopy.splice(idx, 1)[0])
-  }
-  return randomLabels
 }
 
 function _createToys() {

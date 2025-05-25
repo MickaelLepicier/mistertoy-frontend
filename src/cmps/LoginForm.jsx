@@ -1,10 +1,10 @@
 import { useState } from 'react'
-import { userService } from '../services/user.service.js'
+import { getEmptyCredentials } from '../services/user'
 import { useTranslation } from 'react-i18next'
 
 export function LoginForm({ onLogin, isSignup }) {
   const [credentials, setCredentials] = useState(
-    userService.getEmptyCredentials()
+    getEmptyCredentials()
   )
   const { t, i18n } = useTranslation()
 

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { MyChart } from '../cmps/MyChart'
 import { Loader } from '../cmps/Loader'
-import { toyService } from '../services/toy.service.remote'
+import { toyService } from '../services/toy'
 import { useTranslation } from 'react-i18next'
 
 export function ToyDashboard() {
