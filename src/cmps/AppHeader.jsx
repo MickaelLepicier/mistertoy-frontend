@@ -14,10 +14,10 @@ export function AppHeader() {
   const user = useSelector((storeState) => storeState.userModule.loggedInUser)
   const filterBy = useSelector((storeState) => storeState.toyModule.filterBy)
   const sortBy = useSelector((storeState) => storeState.toyModule.sortBy)
-
   const [toyLabels, setToyLabels] = useState()
 
   const { t, i18n } = useTranslation()
+  
   const lngs = {
     en: { nativeName: 'EN' },
     fr: { nativeName: 'FR' }
@@ -28,6 +28,7 @@ export function AppHeader() {
   }, [])
 
   async function loadToyLabels() {
+
     try {
       const labels = await toyService.getToyLabels()
       setToyLabels(labels)
@@ -76,7 +77,7 @@ export function AppHeader() {
           <NavLink to="/toy">{t('toys')} </NavLink>
           <NavLink to="/dashboard">{t('dashboard')} </NavLink>
           <NavLink to="/review">{t('reviews')}</NavLink>
-          <NavLink to="/user">{t('profile')}</NavLink>
+          <NavLink to={`/user/${user._id}`}>{t('profile')}</NavLink>
           <NavLink to="/about">{t('about')} </NavLink>
         </nav>
       </main>

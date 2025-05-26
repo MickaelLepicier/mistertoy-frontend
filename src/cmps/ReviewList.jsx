@@ -3,8 +3,8 @@ import { userService } from '../services/user'
 import { ReviewPreview } from './ReviewPreview.jsx'
 
 export function ReviewList({ reviews, onRemoveReview }) {
-    function shouldShowActionBtns(review) {
-        const user = userService.getLoggedInUser()
+    async function shouldShowActionBtns(review) {
+        const user = await userService.getLoggedinUser()
         if (!user) return false
         if (user.isAdmin) return true
         return review.byUser?._id === user._id

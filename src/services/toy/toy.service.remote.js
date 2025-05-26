@@ -31,7 +31,8 @@ function remove(toyId) {
 
 function save(toy) {
   const method = toy._id ? 'put' : 'post'
-  return httpService[method](BASE_URL, toy)
+  const id = toy._id ? toy._id : ''
+  return httpService[method](BASE_URL + id, toy)
 }
 
 function getDefaultSort() {

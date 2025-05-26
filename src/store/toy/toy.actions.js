@@ -52,9 +52,9 @@ export async function removeToyOptimistic(toyId) {
 }
 
 export async function saveToy(toy) {
+  console.log('toy: ',toy)
   // add || update
   const type = toy._id ? UPDATE_TOY : ADD_TOY
-  console.log('type: ', type)
 
   try {
     const toyToSave = await toyService.save(toy)

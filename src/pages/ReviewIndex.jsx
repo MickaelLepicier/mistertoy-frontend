@@ -59,7 +59,7 @@ export function ReviewIndex() {
   }
 
   return (
-    <div className="review-index">
+    <div className="review-index container">
       <h2>{t('reviews_gossip')}</h2>
       {!user && <p>{t('login_first')}</p>}
       {user && <ReviewEdit toys={toys} />}

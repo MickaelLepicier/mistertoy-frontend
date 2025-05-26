@@ -41,7 +41,7 @@ export function ToyIndex() {
 
   // console.log('toys: ',toys)
   return (
-    <section className="toy-index">
+    <section className="toy-index container">
       {user && user.isAdmin && (
         <div style={{ marginBlockStart: '0.5em', textAlign: 'center' }}>
           <button style={{ marginInline: 0 }}>

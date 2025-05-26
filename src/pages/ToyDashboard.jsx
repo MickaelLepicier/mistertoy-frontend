@@ -36,7 +36,7 @@ async function loadInStockStats(){
 if(!priceStats || !inStockStats) return <Loader text={t('loading')}/>
 
 return (
-    <section>
+    <section className='container'>
       <MyChart priceStats={priceStats} inStockStats={inStockStats}/>
     </section>
   )

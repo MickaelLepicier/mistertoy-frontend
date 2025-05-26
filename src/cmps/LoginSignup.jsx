@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next'
 export function LoginSignup() {
     
     const [isSignup, setIsSignUp] = useState(false)
-    const { t, i18n } = useTranslation()
+    const { t } = useTranslation()
 
     function onLogin(credentials) {
         isSignup ? _signup(credentials) : _login(credentials)

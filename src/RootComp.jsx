@@ -18,7 +18,7 @@ import { UserDetails } from './pages/UserDetails'
 
 function App() {
   const style = {
-    minHeight: '85vh'
+    // minHeight: '85vh'
   }
 
   return (
@@ -40,7 +40,7 @@ function App() {
               <Route element={<ToyEdit />} path="/toy/edit/:toyId?" />
               <Route element={<ToyDashboard />} path="/dashboard" />
               <Route element={<ReviewIndex />} path="/review" />
-              <Route element={<UserDetails />} path="/user" />
+              <Route element={<UserDetails />} path="/user/:userId" />
             </Routes>
           </main>
           <DynamicModal />

@@ -103,7 +103,7 @@ export function ToyEdit() {
     }
 
     const theme = useTheme()
-    const [personName, setPersonName] = React.useState([])
+    const [personName, setPersonName] = useState([])
 
     const handleChange = (event) => {
       const {
@@ -158,7 +158,7 @@ export function ToyEdit() {
 
   return (
     <section className="toy-edit">
-      <h2>{toyId ? 'Edit' : 'Add'} Toy</h2>
+      <h2>{toyId ? 'Update' : 'Add'} Toy</h2>
       <Formik
         initialValues={initialValues}
         enableReinitialize

@@ -5,7 +5,7 @@ export function About() {
   const { t } = useTranslation()
 
   return (
-    <section className="about-page">
+    <section className="about-page container">
       <h1>{t('about_us')}</h1>
       <h1>{t('welcome_to')} Mister-Toy</h1>
       <p>{t('msg_p_1')}</p>

@@ -54,7 +54,7 @@ export function ToyDetails() {
   const msgs = toy.msgs.map((m) => m.txt).join(', ')
 
   return (
-    <section className="toy-details" style={{ textAlign: 'center' }}>
+    <section className="toy-details container" style={{ textAlign: 'center' }}>
       <h1>
         {t('toy_name')}: <span>{toy.name}</span>
       </h1>

@@ -6,7 +6,7 @@ export function LoginForm({ onLogin, isSignup }) {
   const [credentials, setCredentials] = useState(
     getEmptyCredentials()
   )
-  const { t, i18n } = useTranslation()
+  const { t } = useTranslation()
 
   function handleChange({ target }) {
     const { name: field, value } = target
